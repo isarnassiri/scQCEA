@@ -54,18 +54,46 @@ library("scQCEA")
 
 csQCEAdir <- system.file("extdata", package = "scQCEA")
 DataTyep <- '10X-gex'
-SampleName <- '481207_03'
+SampleName <- '481207_03' 
+# Name of an indicated sample
 SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
+# Metadata of samples including the following headers: Project Number,	LIMS ID,	Sample Name,	Index	Library Type,	Genome,	Flowcell ID,	Lane Number,	Sequencing ID
+
 ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
+# Gene-cell count matrix from 10X CellRanger count
 GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
+# We convert Ensembl ids to gene names/symbols by parsing this GTF (General Transfer Format) file
 BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
+# We used Human Protein Atlas database (version 21.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type
 tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
+# tSNE projections from 10X CellRanger count
 UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
+# UMAP projections from 10X CellRanger count
 RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
+# A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
 FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
+# A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
 
 CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
 ``` 
+
+
+ 
+ #'@param BackendDataDir
+#' We used Human Protein Atlas database (version 21.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type
+#'@param tSNECellranger 
+#'tSNE projections from 10X CellRanger count
+#'@param UMAPCellranger 
+#'UMAP projections from 10X CellRanger count
+#'@param RawFeatureDir
+#'A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
+#'@param FilteredFeatureBarcodes
+#'#'A folder including filtered feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz)
+ 
+
+
+
+
 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
