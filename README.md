@@ -17,8 +17,11 @@ Please see the [`manual`](https://isarnassiri.github.io/scQCEA/) for the usage o
 ### Installation
 1. Install the R [(LINK)](https://cran.r-project.org/)
 2. Install the free version of rStudio [(LINK)](https://www.rstudio.com/products/rstudio/download/)
-3. Download scQCEA from GitHub [(LINK)](https://github.com/isarnassiri/scQCEA/), and unzip the folder
-4. To install scQCEA, run the `RUN_ME.R` script from the RStudio. All dependency packages automatically will be downloaded, installed and loaded from CRAN-like repositories.
+3. Install scQCEA as an R package as follows:
+
+```{r,eval=FALSE}
+install_github("isarnassiri/scQCEA")
+```
 
 ### Usage
 
