@@ -1,0 +1,17 @@
+---
+title: 
+output: html_document
+---
+ 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(kableExtra)
+library(DT)
+library(downloadthis)
+library(ggplot2)
+```
+
+In the project you have one sample that is processed through one GEM well resulting in one ATAC library and one GEX library. The ATAC and GEX libraries are sequenced on multiple flow cells each. This may be done to increase sequencing depth, when the first sequencing run did not produce enough raw read pairs per cell. Here we would run cellranger-arc mkfastq a total of multiple times: once for each of the ATAC flow cells and once for each of the GEX flow cells. All of the reads can be combined in a single instance of the cellranger-arc count pipeline. 
+
+
