@@ -25,7 +25,7 @@ install_github("isarnassiri/scQCEA")
 
 ### Usage
 
-It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please open the `RUN_ME.R` file using rStudio, select all scripts incluidng `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
+It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts incluidng `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
 
 ```{r,eval=FALSE}
 
@@ -33,12 +33,7 @@ It is easy to create an interactive QC report for those who possess little or no
 # Please execute the code in the RStudio IDE (https://www.rstudio.com/) #
 #########################################################################
 
-##### Install and load R packages #####
-if(!("rstudioapi" %in% installed.packages()[,"Package"])) install.packages("rstudioapi", repos = "http://cran.us.r-project.org", update = FALSE); library("rstudioapi")
-
-##### Generate an "Interactive QC Report" #####
-setwd("~/"); setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path), '/Scripts/')); 
-source("GenerateInteractiveQCReport.R")
+library("scQCEA")
 GenerateInteractiveQCReport()
 
 ############################################################ 
@@ -55,10 +50,21 @@ Cell type annotation on scRNA-Seq data is a pre-step for generating an interacti
 ```{r,eval=FALSE}
 
 ##### Cell Type Enrichment Analysis #####
-setwd("~/"); setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path), '/Scripts/')); 
-source("CellTypeEnrichment.R")
-CellTypeEnrichment()
+library("scQCEA")
 
+csQCEAdir <- system.file("extdata", package = "scQCEA")
+DataTyep <- '10X-gex'
+SampleName <- '481207_03'
+SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
+ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
+GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
+BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
+tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
+UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
+RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
+FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
+
+CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
 ``` 
 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
