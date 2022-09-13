@@ -45,7 +45,7 @@ GenerateInteractiveQCReport()
 By default, the HTML report will be written in /Outputs directory named `CLICK_ME.html`. You can open `CLICK_ME.html` without using rStudio/R. In addition, you can find a zip file in the /Outputs directory which is particularly useful to share or store the QC reports. The content of the "Data processing Workflow" section is automatically adjusted based on the type of application (s) and the "Library Type" column in "samples.metadata" file.
 
 ### Cell Type Enrichment Analysis
-Cell type annotation on scRNA-Seq data is a pre-step for generating an interactive QC report with scQCEA. This step requires some bioinformatics efforts, but scQCEA provides `CellTypeEnrichment()` functions, for cell-type enrichment analysis at the single-cell level that comprises all the intermediate steps including visualization (you can find the code in `RUN_ME.R` file):
+Cell type annotation on scRNA-Seq data is a pre-step for generating an interactive QC report with scQCEA. This step requires some bioinformatics efforts, but scQCEA provides `CellTypeEnrichment()` functions, for cell-type enrichment analysis at the single-cell level that comprises all the intermediate steps including visualization:
 
 ```{r,eval=FALSE}
 
@@ -54,7 +54,10 @@ Cell type annotation on scRNA-Seq data is a pre-step for generating an interacti
 library("scQCEA")
 
 csQCEAdir <- system.file("extdata", package = "scQCEA")
+# A directory path incluidng input files/folders
+
 DataTyep <- '10X-gex'
+# Name of a folder including input files
 
 SampleName <- '481207_03' 
 # Name of an indicated sample
