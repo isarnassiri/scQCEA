@@ -1,2 +1,0 @@
-Chemistry Av_cell Av_Viability vCell_Suspension Capture_efficiency Av_Num_Cells_to_Load
-sc5pr-v3.1 11.65 21.7 6.0 36 6944
