@@ -1,0 +1,45 @@
+---
+title: 
+output: html_document
+---
+ 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(kableExtra)
+library(DT)
+library(downloadthis)
+library(ggplot2)
+```
+
+The cellranger multi subcommand is required to analyze 3' Cell Multiplexing data. Running cellranger multi requires a config CSV. The multi config CSV contains both the library definitions and experimental design variables. It is composed of up to three sections for 3' data: [gene-expression], [feature], and [libraries]. The [gene-expression] and [feature] sections have at most two columns, and are responsible for configuring their respective portions of the experiment. The [libraries] section specifies where input FASTQ files may be found.
+
+```{r, echo = FALSE}
+appliation='CellRanger/6.1.1 multi';
+
+DiagrammeR::grViz("
+  digraph graph2 {
+  
+  graph [layout = dot, rankdir = LR]
+  
+  # node definitions with substituted label text
+  node [shape = box, style=rounded, color=brown, fillcolor=azure3, fontsize=25]
+  a [label = '@@1']
+  b [label = '@@2']
+  c [label = '@@3']
+  d [label = '@@4']
+  e [label = '@@5']
+  
+  a -> b -> c -> d -> e
+  }
+  
+  [1]: 'bcl2fastq'
+  [2]: appliation[1]
+  [3]: 'Generation of metadata'
+  [4]: 'Merging multiple sequencing runs'
+  [5]: 'Secondary analyses'
+  ",
+  height = 100)
+```
+
+

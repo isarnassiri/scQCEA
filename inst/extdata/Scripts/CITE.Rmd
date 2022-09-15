@@ -1,0 +1,45 @@
+---
+title: 
+output: html_document
+---
+ 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(kableExtra)
+library(DT)
+library(downloadthis)
+library(ggplot2)
+```
+
+Cell Ranger processes all Feature Barcode data through a counting pipeline that quantifies each feature in each cell. This analysis is done by the cellranger count pipeline. The pipeline outputs a unified feature-barcode matrix that contains gene expression counts alongside Feature Barcode counts for each cell barcode.
+
+The pipeline first extracts and corrects the cell barcode and UMI from the feature library using the same methods as gene expression read processing. It then then matches the Feature Barcode read against the list of features declared in the Feature Barcode Reference. The counts for each feature are available in the feature-barcode matrix output files and in the Loupe Browser output file.
+
+```{r, echo = FALSE}
+appliation='cellranger-6.1.1-TS count';
+
+DiagrammeR::grViz("
+  digraph graph2 {
+  
+  graph [layout = dot, rankdir = LR]
+  
+  # node definitions with substituted label text
+  node [shape = box, style=rounded, color=brown, fillcolor=azure3, fontsize=25]
+  a [label = '@@1']
+  b [label = '@@2']
+  c [label = '@@3']
+  d [label = '@@4']
+  
+  a -> b -> c -> d
+  }
+  
+  [1]: 'bcl2fastq'
+  [2]: appliation[1]
+  [3]: 'Generation of metadata'
+  [4]: 'Secondary analyses'
+  ",
+  height = 100)
+```
+
+

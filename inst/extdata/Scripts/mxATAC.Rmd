@@ -1,0 +1,47 @@
+---
+title: 
+output: html_document
+---
+ 
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
+library(kableExtra)
+library(DT)
+library(downloadthis)
+library(ggplot2)
+```
+
+The Single Cell Multiome ATAC + Gene Expression software suite consists of Cell Ranger ARC for the analysis of chromatin accessibility and 3' gene expression data from the same cell produced by the 10x platform.
+
+Cell Ranger ARC performs sample demultiplexing, barcode processing, identification of open chromatin regions, and simultaneous counting of transcripts and peak accessibility in single cells. 
+
+Additionally, the pipelines perform secondary analyses like dimensionality reduction, clustering, differential analysis, and feature linkage between peaks and genes that aid in data interpretation.
+
+```{r, echo = FALSE}
+appliation='Cell Ranger ARC v2.0';
+
+DiagrammeR::grViz("
+  digraph graph2 {
+  
+  graph [layout = dot, rankdir = LR]
+  
+  # node definitions with substituted label text
+  node [shape = box, style=rounded, color=brown, fillcolor=azure3, fontsize=25]
+  a [label = '@@1']
+  b [label = '@@2']
+  c [label = '@@3']
+  d [label = '@@4']
+  
+  a -> b -> c -> d
+  }
+  
+  [1]: 'bcl2fastq'
+  [2]: appliation[1]
+  [3]: 'Generation of metadata'
+  [4]: 'Secondary analyses'
+  ",
+  height = 100)
+```
+
+
