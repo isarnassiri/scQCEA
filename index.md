@@ -154,6 +154,52 @@ Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell ex
 
 The tSNE and UMAP projections are the outputs of dimensionality reduction analysis in CSV format (projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/algorithms/overview).
 
+You can use a shell script to reorgenize the outputs of single-cell expriments (e.g. 10X CellRnager) in an inputs for scQCEA package as follows:
+
+```{r,eval=FALSE}
+#--- add the metrics_summary.csv to the Inputs folder
+
+PID=('P220301' )
+echo ${PID[@]}
+
+types=('vdj' 'gex' 'feat' 'arc' 'atac' 'vdj-grouped' 'gex-grouped' 'feat-grouped' 'arc-grouped' 'atac-grouped')
+
+for NAME in "${PID[@]}"
+do
+
+NAMEFOLDER=$NAME
+cd '~/'$NAMEFOLDER
+
+for TYPE in "${types[@]}"
+do
+
+FOLDER='10X-'$TYPE
+
+if [ -d "$FOLDER" ]; then
+
+echo "$FOLDER exists."
+
+mkdir -p ~/$NAMEFOLDER/Inputs/10X-$TYPE/
+
+cd 10X-$TYPE/
+tar czf ~/$NAMEFOLDER/Inputs/10X-$TYPE/metrics_summary_$TYPE'_'$NAMEFOLDER.tar.gz */outs/*summary.csv
+
+cd ~/$NAMEFOLDER/Inputs/10X-$TYPE/
+tar -xvzf metrics_summary_$TYPE'_'$NAMEFOLDER.tar.gz
+rm 'metrics_summary_'$TYPE'_'$NAMEFOLDER'.tar.gz'
+
+cd ~/$NAMEFOLDER/
+
+fi
+
+done
+
+cp ~/$NAMEFOLDER/samples.metadata ~/$NAMEFOLDER/Inputs/
+
+done
+```
+
+
 ### Cell Type Enrichment Analysis
 Cell type annotation on scRNA-Seq data is a pre-step for generating an interactive QC report with scQCEA. This step requires some bioinformatics efforts, but scQCEA provides a function that comprises all the intermediate steps including visualization.
 
