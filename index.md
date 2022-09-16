@@ -154,7 +154,7 @@ Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell ex
 
 The tSNE and UMAP projections are the outputs of dimensionality reduction analysis in CSV format (projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/algorithms/overview).
 
-You can use a shell script to reorgenize the outputs of single-cell expriments (e.g. 10X CellRnager) in an inputs for scQCEA package as follows:
+You can automate organizing outputs of single-cell expriments (e.g. 10X CellRnager) to provide inputs for scQCEA package as follows:
 
 ```{r,eval=FALSE}
 
