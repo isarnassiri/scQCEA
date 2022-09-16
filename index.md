@@ -7,15 +7,14 @@ The easiest way to generate an interactive summary QC report is to run the `RUN_
 
 ### Easy Installation
 1. Install the R [(LINK)](https://cran.r-project.org/)
-2. Install the Rtools if you use Windows OS [(LINK)](https://cran.r-project.org/bin/windows/Rtools/)
-3. Install the free version of rStudio [(LINK)](https://www.rstudio.com/products/rstudio/download/)
-4. Download scQCEA from GitHub (Figure 1) [(LINK)](https://github.com/isarnassiri/scQCEA/), and unzip the folder
+2. Install the free version of rStudio [(LINK)](https://www.rstudio.com/products/rstudio/download/)
+3. Run the following command in rStudio to install scQCEA as an R package:
 
-| ![Figure 1](/Download_Github.png) | 
-|:--:| 
-| *Figure 1. How to download scQCEA from GitHub* |
+```{r,eval=FALSE}
+install_github("isarnassiri/scQCEA")
+```
 
-4. To install scQCEA, run the `RUN_ME.R` script from the RStudio. All dependency packages automatically will be downloaded, installed and loaded from CRAN-like repositories. The following versions of its dependencies are compatible with the library:
+All dependency packages automatically will be downloaded, installed and loaded from CRAN-like repositories. The following versions of its dependencies are compatible with the library:
 
 **Required version of packages in R:**
 
@@ -89,7 +88,11 @@ The easiest way to generate an interactive summary QC report is to run the `RUN_
 We only tested scQCEA in the R version 4.1.3 (2022-03-10) environment. You need to have root permission for this distribution, including the installation of any package.
 
 ### Install from Source Code
-Alternatively, you can download the source codes and install libraries using the terminal.
+Alternatively, you can download the source codes and install libraries using the terminal as follows:
+
+| ![Figure 1](/Download_Github.png) | 
+|:--:| 
+| *Figure 1. How to download scQCEA from GitHub* |
 
 ### Manual
 It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please open the `RUN_ME.R` file using rStudio, select all scripts including `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab (Figure 2).
