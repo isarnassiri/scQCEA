@@ -114,7 +114,7 @@ An interactive QC report automatically will be generated in one HTML file in the
 
 | <img src="Figure_1.png" width="800" height="360"> | 
 |:--:| 
-| *Figure 3. The outline of scQCEA. See text for details* |
+| *Figure 2. The outline of scQCEA. See text for details* |
 
 Experimental workflow describes scRNA-seq transcriptome processing and sequencing platform. Data processing workflow presents an analysis pipeline to process data, including aligning reads, generating feature-barcode matrices, and other secondary analyses. Samples information and QC metrics provide tables of metadata and QC, listing a variety of metrics per application. Data analysis and quality control present projection of transcriptionally and functionally distinct clusters, highlighted by cell type group, including UMAP and t-SNE plots. Diagnostic plots provide technical features, including the distribution of non-duplicate reads with mapping quality per barcode.
 <br />
@@ -124,29 +124,29 @@ By default, the HTML report will be written in the /Outputs directory named `CLI
 ### Input Data
 As input, the scQCEA package expects the following data:
 
-* Metadata of samples (Figure 4) (samples.metadata)
+* Metadata of samples (Figure 3) (samples.metadata)
 
 | <img src="meta.data.png" width="600" height="200"> | 
 |:--:| 
-| *Figure 4. Sample Metadata file* |
+| *Figure 3. Sample Metadata file* |
 
-* Project Description (Figure 5) (PInf.txt)
+* Project Description (Figure 4) (PInf.txt)
 
 | <img src="PInf.png" width="400" height="75"> | 
 |:--:| 
-| *Figure 5. Sample project description file* |
+| *Figure 4. Sample project description file* |
 
-* Output of 10X CellRanger or other single-cell experiments per pipeline (e.g. gex, ATAC, feat, etc.) [Note: you need to have at least one gene expression sample (gex)] (Figure 6)
+* Output of 10X CellRanger or other single-cell experiments per pipeline (e.g. gex, ATAC, feat, etc.) [Note: you need to have at least one gene expression sample (gex)] (Figure 5)
 
 | <img src="Inputs_0.png" width="200" height="230"> | 
 |:--:| 
-| *Figure 6. Sample input files* |
+| *Figure 5. Sample input files* |
 
-* scQCEA expects the following files in the outs/ subdirectory within each pipeline output directory (Figure 7):
+* scQCEA expects the following files in the outs/ subdirectory within each pipeline output directory (Figure 6):
 
 | <img src="Inputs_1.png" width="250" height="370"> | 
 |:--:| 
-| *Figure 7. Sample input files in outs/ subdirectories* |
+| *Figure 76. Sample input files in outs/ subdirectories* |
 
 Genomics sample report file including a summary of the alignment and assignment of reads to cells and genes are present in the metrics_summary.csv.
 
