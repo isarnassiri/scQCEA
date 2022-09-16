@@ -80,7 +80,6 @@ All dependency packages automatically will be downloaded, installed and loaded f
 
  [1] /Library/Frameworks/R.framework/Versions/4.1/Resources/library
 ─────────────────────────────────────────────────────────────────────────────────────────────────
-
 ```
 
 **Environment:** 
@@ -88,20 +87,30 @@ All dependency packages automatically will be downloaded, installed and loaded f
 We only tested scQCEA in the R version 4.1.3 (2022-03-10) environment. You need to have root permission for this distribution, including the installation of any package.
 
 ### Install from Source Code
-Alternatively, you can download the source codes and install libraries using the terminal as follows:
+Alternatively, you can download the source codes and install libraries using the terminal.
 
 | ![Figure 1](/Download_Github.png) | 
 |:--:| 
 | *Figure 1. How to download scQCEA from GitHub* |
 
 ### Manual
-It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please open the `RUN_ME.R` file using rStudio, select all scripts including `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab (Figure 2).
+It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts incluidng `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
 
-| <img src="RunME.png" width="500" height="220"> | 
-|:--:| 
-| *Figure 2. How to create an interactive QC report* |
+```{r,eval=FALSE}
 
-An interactive QC report automatically will be generated in one HTML file in the "Outputs/" folder, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control (Figure 3).
+#########################################################################
+# Please execute the code in the RStudio IDE (https://www.rstudio.com/) #
+#########################################################################
+
+library("scQCEA")
+GenerateInteractiveQCReport()
+
+############################################################ 
+#  Find the "Interactive QC Report" in the Outputs/ folder #
+############################################################
+```
+
+An interactive QC report automatically will be generated in one HTML file in the "Outputs/" folder, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control (Figure 2).
 
 | <img src="Figure_1.png" width="800" height="360"> | 
 |:--:| 
