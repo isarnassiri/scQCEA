@@ -146,7 +146,7 @@ As input, the scQCEA package expects the following data:
 
 | <img src="Inputs_1.png" width="250" height="370"> | 
 |:--:| 
-| *Figure 76. Sample input files in outs/ subdirectories* |
+| *Figure 6. Sample input files in outs/ subdirectories* |
 
 Genomics sample report file including a summary of the alignment and assignment of reads to cells and genes are present in the metrics_summary.csv.
 
@@ -160,23 +160,57 @@ Cell type annotation on scRNA-Seq data is a pre-step for generating an interacti
 **Recommended strategy for cell-type enrichment analysis:**
 <br />
 
-scQCEA provides `CellTypeEnrichment()` function for cell-type enrichment analysis at the single-cell level and visualization of outputs (you can find the code in `RUN_ME.R` file):
-
+scQCEA provides `CellTypeEnrichment()` functions, for cell-type enrichment analysis at the single-cell level that comprises all the intermediate steps including visualization:
 
 ```{r,eval=FALSE}
 
 ##### Cell Type Enrichment Analysis #####
-setwd("~/"); setwd(paste0(dirname(rstudioapi::getActiveDocumentContext()$path), '/Scripts/')); 
-source("CellTypeEnrichment.R")
-CellTypeEnrichment()
 
+library("scQCEA")
+
+csQCEAdir <- system.file("extdata", package = "scQCEA")
+# A directory path incluidng input files/folders
+
+DataTyep <- '10X-gex'
+# Name of a folder including input files
+
+SampleName <- '481207_03' 
+# Name of an indicated sample
+
+SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
+# Metadata of samples including the following headers: Project Number,	LIMS ID,	Sample Name,	Index	Library Type,	Genome,	Flowcell ID,	Lane Number,	Sequencing ID
+
+ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
+# Gene-cell count matrix from 10X CellRanger count
+
+GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
+# We convert Ensembl ids to gene names/symbols by parsing this GTF (General Transfer Format) file
+
+BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
+# We used Human Protein Atlas database (version 21.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type
+
+tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
+# tSNE projections from 10X CellRanger count
+
+UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
+# UMAP projections from 10X CellRanger count
+
+RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
+# A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
+
+FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
+# A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
+
+CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
 ``` 
 
-The function applies the area under the curve and bimodal distribution to separate the distributions and evaluate the strength of enrichment of each reference cell with genes in an indicated cell (Aibar, et al., 2017). The outputs of `CellTypeEnrichment` function include visualization of transcriptionally and functionally distinct clusters, highlighted by cell type group using Uniform Manifold Approximation and Projection (UMAP) and t-stochastic neighbor embedding (t-SNE) plots. In addition, it generates Heatmap plots based on cells showing the most enriched expressed genes in each cell type group, and the Barcode Rank Plot showing the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells (Figure 8). The results can be used for objective selection of insightful optimal cluster numbers and discriminate between true variation and background noise. For data sets including multiple samples, you can batch submit serial jobs for parallel execution of `CellTypeEnrichment` function per sample on a High Performance Computing (HPC) system.
+`GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
+
+The function applies the area under the curve and bimodal distribution to separate the distributions and evaluate the strength of enrichment of each reference cell with genes in an indicated cell (Aibar, et al., 2017). The outputs of `CellTypeEnrichment` function include visualization of transcriptionally and functionally distinct clusters, highlighted by cell type group using Uniform Manifold Approximation and Projection (UMAP) and t-stochastic neighbor embedding (t-SNE) plots. In addition, it generates Heatmap plots based on cells showing the most enriched expressed genes in each cell type group, and the Barcode Rank Plot showing the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells (Figure 7). The results can be used for objective selection of insightful optimal cluster numbers and discriminate between true variation and background noise. For data sets including multiple samples, you can batch submit serial jobs for parallel execution of `CellTypeEnrichment` function per sample on a High Performance Computing (HPC) system.
 
 | <img src="CellTypeEnrichment_outputs.png" width="350" height="200"> | 
 |:--:| 
-| *Figure 8. The outputs of CellTypeEnrichment function.* |
+| *Figure 7. The outputs of CellTypeEnrichment function.* |
 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
