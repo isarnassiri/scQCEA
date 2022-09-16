@@ -157,9 +157,10 @@ The tSNE and UMAP projections are the outputs of dimensionality reduction analys
 You can use a shell script to reorgenize the outputs of single-cell expriments (e.g. 10X CellRnager) in an inputs for scQCEA package as follows:
 
 ```{r,eval=FALSE}
-#--- add the metrics_summary.csv to the Inputs folder
 
-PID=('P220301' )
+#--- add the metrics_summary.csv and metadata files to the Inputs folder
+
+PID=( FOLDER-NAME ) # PID stnads for project ID
 echo ${PID[@]}
 
 types=('vdj' 'gex' 'feat' 'arc' 'atac' 'vdj-grouped' 'gex-grouped' 'feat-grouped' 'arc-grouped' 'atac-grouped')
