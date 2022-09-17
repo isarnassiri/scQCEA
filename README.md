@@ -3,6 +3,8 @@ To demonstrate the utility of scQCEA, we apply the workflow to the sixteen gene 
 
 Download and unzip the `OGC_Interactive_QC_Report_P180121.zip` file. You can open `CLICK_ME.html` file without using rStudio/R.
 
+![Screenshot](DF.png)
+
 The interactive report of quality control metrics and image QC of profiles allowed visual evaluation and comparison of comprehensive QC metrics. Top ranking genes by expression in each cell illustrate similar cell types in samples, all associated with monocytes, t-cells, and related subsets. These results suggest that the cell type enrichment analysis captures the main clusters across cells and samples share similar cellular compositions in agreement with the original paper (Fairfax, et al., 2020). 
 
 ### References
