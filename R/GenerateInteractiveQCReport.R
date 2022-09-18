@@ -2,7 +2,7 @@
 #############################################################################################
 ###################################### Generate Interactive QC Report #######################
 #############################################################################################
-#'@export
+
 #'@import rstudioapi
 #'@import devtools
 #'@import zip
@@ -32,7 +32,7 @@ GenerateInteractiveQCReport <- NULL
 GenerateInteractiveQCReport <- function()
 {
   setwd(system.file("extdata", package = "scQCEA")); 
-  render("SourceCode.Rmd", quiet = T);
+  render("SourceCode.Rmd", quiet = TRUE);
   
   invisible(file.rename('SourceCode.html', 'CLICK_ME.html'));
   invisible(file.copy(from = 'CLICK_ME.html', to = "Outputs/CLICK_ME.html"));
@@ -54,17 +54,17 @@ GenerateInteractiveQCReport <- function()
   listdir = list.dirs.depth.n(".", n = 5)
   toMatch <- c('analysis', 'raw_feature_bc_matrix')
   matches <- unique(grep(paste(toMatch,collapse="|"), listdir, value=TRUE))
-  invisible(unlink(matches, recursive = T, force = T));
+  invisible(unlink(matches, recursive = TRUE, force = TRUE));
   
-  listfiles = list.files(pattern = 'read_count.csv', recursive = T)
-  invisible(unlink(listfiles, recursive = T, force = T));
+  listfiles = list.files(pattern = 'read_count.csv', recursive = TRUE)
+  invisible(unlink(listfiles, recursive = TRUE, force = TRUE));
   
-  listfiles = list.files(pattern = '*.pdf', recursive = T)
-  invisible(unlink(listfiles, recursive = T, force = T));
+  listfiles = list.files(pattern = '*.pdf', recursive = TRUE)
+  invisible(unlink(listfiles, recursive = TRUE, force = TRUE));
   
   #--- generate zip file
   setwd(system.file("extdata/", package = "scQCEA")); 
-  PInf = fread('Inputs/PInf.txt', stringsAsFactors = F, header = F);
+  PInf = fread('Inputs/PInf.txt', stringsAsFactors = FALSE, header = FALSE);
   
   setwd(system.file("extdata/Outputs", package = "scQCEA")); 
   zip(zipfile = paste0('OGC_Interactive_QC_Report_', gsub('.*=','',PInf$V1[1]),'.zip'), files = c('CLICK_ME.html', 'Inputs'), recurse = TRUE, include_directories = TRUE);

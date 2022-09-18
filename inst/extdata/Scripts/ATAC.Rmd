@@ -5,11 +5,6 @@ output: html_document
  
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(kableExtra)
-library(DT)
-library(downloadthis)
-library(ggplot2)
 ```
 
 Chromium Single Cell ATAC (Assay for Transposase Accessible Chromatin) allows you to analyze chromatin accessibility at the single cell level, providing insights into cell types and states, and deeper understanding of gene regulatory mechanisms. 

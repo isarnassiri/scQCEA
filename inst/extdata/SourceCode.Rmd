@@ -1,39 +1,8 @@
 
-```{r, include=FALSE, echo=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-
-list.of.packages <- c("devtools", "dplyr", "kableExtra", "DT", "downloadthis", "ggplot2", "data.table",  "stringr", "SciencesPo", "R.utils", "readr", "rmarkdown", "DiagrammeR")
-
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages, repos = "http://cran.us.r-project.org", update = FALSE, dependencies = T)
-
-list.of.packages <- c("bsselectR")
-bsselectR <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(bsselectR)){devtools::install_github("walkerke/bsselectR", update = FALSE, dependencies = T)}
-
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(devtools, quietly = TRUE)
-library(DiagrammeR, quietly = TRUE)
-library(stringr, quietly = TRUE)
-library(bsselectR, quietly = TRUE)
-library(kableExtra, quietly = TRUE)
-library(DT, quietly = TRUE)
-library(downloadthis, quietly = TRUE)
-library(ggplot2, quietly = TRUE)
-library(data.table, quietly = TRUE)
-library(dplyr, quietly = TRUE)
-library(readr, quietly = TRUE)
-library(rmarkdown, quietly = TRUE)
-library(R.utils, quietly = TRUE)
-options(knitr.table.format = "latex")
-
-# Getting the path of your current open file
-#dirname(rstudioapi::getActiveDocumentContext()$path)
-```
- 
 <!-- Insert a logo in upper right corner of R markdown html document -->
   
 ```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 PInf = fread('Inputs/PInf.txt', stringsAsFactors = F, header = F)
 

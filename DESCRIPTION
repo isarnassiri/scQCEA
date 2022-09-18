@@ -5,9 +5,9 @@ Description: scQCEA (acronym of the single-cell RNA sequencing Quality Control a
 Depends: R (>= 4.1), DropletUtils, Matrix, data.table, DT, NMF, plotly, stringr, dplyr, AUCell, GSEABase, GEOquery, ggplot2, rstudioapi, reshape2, DiagrammeR, R.utils, bsselectR, devtools, downloadthis, kableExtra, readr, rmarkdown, zip
 License: GPL-2
 Encoding: UTF-8
-LazyData: true
+LazyData: false
 RoxygenNote: 7.2.1
-biocViews: Software, StatisticalMethod
+biocViews: GeneExpression, Transcription, Sequencing, Microarray, SingleCell, Transcriptomics, Coverage,  QualityControl, ImmunoOncology, GeneSetEnrichment, WorkflowStep, GO
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no 

@@ -5,11 +5,6 @@ output: html_document
  
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(kableExtra)
-library(DT)
-library(downloadthis)
-library(ggplot2)
 ```
 
 The ATAC libraries are sequenced on multiple flow cells each. This may be done to increase sequencing depth, when the first sequencing run did not produce enough raw read pairs per cell. Here we would run cellranger-atac mkfastq a total of multiple times: once for each of the ATAC flow cells. All of the reads can be combined in a single instance of the cellranger-atac count pipeline. 

@@ -5,11 +5,6 @@ output: html_document
  
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(kableExtra)
-library(DT)
-library(downloadthis)
-library(ggplot2)
 ```
 
 In the grouped count pipeline, one sample is processed through one GEM well, resulting in one library which is sequenced across multiple flowcells. This workflow is commonly performed to increase sequencing depth. In this case, all reads can be combined in a single instance of the cellranger count pipeline. Finally, the pipelines perform secondary analyses like dimensionality reduction, clustering, and differential analysis.

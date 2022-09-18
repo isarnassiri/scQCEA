@@ -5,11 +5,6 @@ output: html_document
  
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(kableExtra)
-library(DT)
-library(downloadthis)
-library(ggplot2)
 ```
 
 Cell Ranger processes all Feature Barcode data through a counting pipeline that quantifies each feature in each cell. This analysis is done by the cellranger count pipeline. The pipeline outputs a unified feature-barcode matrix that contains gene expression counts alongside Feature Barcode counts for each cell barcode.

@@ -5,11 +5,6 @@ output: html_document
  
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-library(dplyr)
-library(kableExtra)
-library(DT)
-library(downloadthis)
-library(ggplot2)
 ```
 
 The count pipeline is used if the sample was sequenced on multiple flowcells and the sample name used (and therefore fastq file prefix) is not identical between them. Doing this will treat all reads from the library, across flowcells, as one sample.

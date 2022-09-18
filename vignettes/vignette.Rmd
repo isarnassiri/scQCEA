@@ -1,4 +1,15 @@
-scQCEA
+
+---
+title: "scQCEA: An R package for Annotation and Quality Control Report of Single-Cell RNA-Sequencing Data"
+author: "Isar Nassiri"
+date: "September 19, 2022"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{scQCEA: An R package for Annotation and Quality Control Report of Single-Cell RNA-Sequencing Data\}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
 ==========
 * [Introduction](#introduction)
 * [Installation](#Installation)
@@ -94,3 +105,5 @@ CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, 
 ### Citation
 
 Isar Nassiri, Benjamin Fairfax, Angela Lee, Yanxia Wu, David Buck, Paolo Piazza. scQCEA: A Framework for Annotation and Quality Control Report of Single-Cell RNA-Sequencing Data. 
+
+sessionInfo()
