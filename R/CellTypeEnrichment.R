@@ -172,9 +172,9 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   {
     nBreaks <- 5 # Number of levels in the color palettes
     # Color palette for the cells that do not pass the threshold
-    colorPal_Neg <- grDevices::colorRampPalette(c("black","blue", "skyblue"))(nBreaks)
+    colorPal_Neg <- colorRampPalette(c("black","blue", "skyblue"))(nBreaks)
     # Color palette for the cells that pass the threshold
-    colorPal_Pos <- grDevices::colorRampPalette(c("pink", "magenta", "red"))(nBreaks)
+    colorPal_Pos <- colorRampPalette(c("pink", "magenta", "red"))(nBreaks)
     
     passThreshold <- getAUC(cells_AUC)[geneSetName,] >  selectedThresholds[geneSetName]
     
@@ -218,9 +218,9 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   {
     nBreaks <- 5 # Number of levels in the color palettes
     # Color palette for the cells that do not pass the threshold
-    colorPal_Neg <- grDevices::colorRampPalette(c("black","blue", "skyblue"))(nBreaks)
+    colorPal_Neg <- colorRampPalette(c("black","blue", "skyblue"))(nBreaks)
     # Color palette for the cells that pass the threshold
-    colorPal_Pos <- grDevices::colorRampPalette(c("pink", "magenta", "red"))(nBreaks)
+    colorPal_Pos <- colorRampPalette(c("pink", "magenta", "red"))(nBreaks)
     
     passThreshold <- getAUC(cells_AUC)[geneSetName,] >  selectedThresholds[geneSetName]
     
