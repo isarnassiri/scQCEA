@@ -200,7 +200,7 @@ cp ~/$NAMEFOLDER/samples.metadata ~/$NAMEFOLDER/Inputs/
 done
 ```
 
-You need to copy the "Inputs" folder to the "scQCEA/extdata" folder. You can find path to the "scQCEA/extdata" using `system.file("extdata", package = "scQCEA")` command.
+You need to copy the "Inputs" folder to the "scQCEA/extdata" folder. You can find path to the "scQCEA/extdata" in the directory structure of the installed package using `system.file("extdata", package = "scQCEA")` command.
 
 ### Cell Type Enrichment Analysis
 Cell type annotation on scRNA-Seq data is a pre-step for generating an interactive QC report with scQCEA. This step requires some bioinformatics efforts, but scQCEA provides a function that comprises all the intermediate steps including visualization.
