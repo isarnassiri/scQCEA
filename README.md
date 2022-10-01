@@ -20,6 +20,7 @@ Please see the [`manual`](https://isarnassiri.github.io/scQCEA/) for the usage o
 3. Run the following command in rStudio to install scQCEA as an R package:
 
 ```{r,eval=FALSE}
+library(devtools)
 install_github("isarnassiri/scQCEA")
 ```
 
