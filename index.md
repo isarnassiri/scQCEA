@@ -12,6 +12,7 @@ The easiest way to generate an interactive summary QC report is to run the `RUN_
 
 ```{r,eval=FALSE}
 library(devtools)
+devtools::install_github("walkerke/bsselectR")
 install_github("isarnassiri/scQCEA")
 ```
 
