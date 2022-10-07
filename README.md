@@ -21,6 +21,7 @@ Please see the [`manual`](https://isarnassiri.github.io/scQCEA/) for the usage o
 
 ```{r,eval=FALSE}
 library(devtools)
+devtools::install_github("walkerke/bsselectR")
 install_github("isarnassiri/scQCEA")
 ```
 
