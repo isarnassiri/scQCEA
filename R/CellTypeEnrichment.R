@@ -22,8 +22,6 @@
 #'@title Cell Type Enrichment Analysis for Gene Expression scRNA-seq data
 #'@description Cell type annotation on scRNA-Seq data is a pre-step for generating an interactive QC report with scQCEA. scQCEA provides a function called CellTypeEnrichment, for automatic cell type identification and visualization on the gene-by-cell count matrix.
 #'@author {Isar Nassiri}
-#'@param InputsDirectory
-#'Inputs/ directory path
 #'@param SamplesMetadata
 #'Metadata of samples including the following headers: Project Number,	LIMS ID,	Sample Name,	Index	Library Type,	Genome,	Flowcell ID,	Lane Number,	Sequencing ID
 #'@param ReadCount
@@ -45,24 +43,24 @@
 #'@return You can find the results in R object under title of 'RESULTsGenomicFeatures' and 'RESULTsChromatinState'.
 #'@examples
 #'library("scQCEA")
-#'InputsDirectory <- system.file("extdata", package = "scQCEA")
+#'csQCEAdir <- system.file("extdata", package = "scQCEA")
 #'DataTyep <- '10X-gex'
 #'SampleName <- '481207_03'
-#'SamplesMetadata = paste(InputsDirectory, 'Inputs/samples.metadata', sep = '/' )
-#'ReadCount = paste(InputsDirectory, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
-#'GTF = paste(InputsDirectory, 'ensembl_human.txt', sep = '/')
-#'BackendDataDir = paste(InputsDirectory, 'ReferenceGeneSets/', sep = '/')
-#'tSNECellranger = paste(InputsDirectory, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
-#'UMAPCellranger =  paste(InputsDirectory, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
-#'RawFeatureDir = paste(InputsDirectory, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
-#'FilteredFeatureBarcodes = paste(InputsDirectory, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
-#'CellTypeEnrichment(Inputs, SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
+#'SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
+#'ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
+#'GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
+#'BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
+#'tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
+#'UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
+#'RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
+#'FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
+#'CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
 #'@export
 CellTypeEnrichment <- NULL
-CellTypeEnrichment <- function(InputsDirectory, SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes )
+CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes )
 {
   # ---------------------------------- Create output directory
-  output.dir_perSample <- paste(InputsDirectory, 'Inputs', DataTyep, SampleName, sep = '/')
+  output.dir_perSample <- paste(csQCEAdir, 'Inputs', DataTyep, SampleName, sep = '/')
 
   # ---------------------------------- read the scRNAseq profile
   TP_profile = fread(paste0(ReadCount, '/read_count.csv'), stringsAsFactors = FALSE)
@@ -147,8 +145,8 @@ CellTypeEnrichment <- function(InputsDirectory, SampleName, SamplesMetadata, Rea
   assignmentTable_dedup_ClusterNumber = assignmentTable_dedup_ClusterNumber[order(assignmentTable_dedup_ClusterNumber$Freq,decreasing = TRUE),]
   
   # ---------------------------------- save cell assignments as a text file
-  write.table(assignmentTable_dedup, paste(InputsDirectory, 'Inputs', DataTyep, SampleName, 'Celltype_assignment_toCells.txt', sep = '/'), quote = FALSE, row.names = FALSE, sep = '\t')
-  write.table(assignmentTable_dedup_ClusterNumber, paste(InputsDirectory, 'Inputs', DataTyep, SampleName, 'Celltype_assignment_toCells_PlusClusters.txt', sep = '/'), quote = FALSE, row.names = FALSE, sep = '\t')
+  write.table(assignmentTable_dedup, paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'Celltype_assignment_toCells.txt', sep = '/'), quote = FALSE, row.names = FALSE, sep = '\t')
+  write.table(assignmentTable_dedup_ClusterNumber, paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'Celltype_assignment_toCells_PlusClusters.txt', sep = '/'), quote = FALSE, row.names = FALSE, sep = '\t')
   
   # ---------------------------------- superimpose the cell type on cell Range clusters [tSNE]
   tSNE_Cellranger = fread(paste0(tSNECellranger,'/projection.csv'), stringsAsFactors = FALSE)
@@ -366,7 +364,7 @@ CellTypeEnrichment <- function(InputsDirectory, SampleName, SamplesMetadata, Rea
   # ----------------------------------
   cat(paste0("\033[0;", 47, "m", "You can find the results in: ", "\033[0m","\n", output.dir_perSample))
   
-  # date()
-  # sessionInfo()
+  date()
+  sessionInfo()
 }
 
