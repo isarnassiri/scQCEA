@@ -32,9 +32,9 @@ GenerateInteractiveQCReport <- NULL
 GenerateInteractiveQCReport <- function()
 {
   setwd(system.file("extdata", package = "scQCEA")); 
-  render("SourceCode.Rmd", quiet = TRUE);
+  render("RMarkDown.Rmd", quiet = TRUE);
   
-  invisible(file.rename('SourceCode.html', 'CLICK_ME.html'));
+  invisible(file.rename('RMarkDown.html', 'CLICK_ME.html'));
   invisible(file.copy(from = 'CLICK_ME.html', to = "Outputs/CLICK_ME.html"));
   invisible(file.remove(paste0(getwd(), '/CLICK_ME.html')));
   
