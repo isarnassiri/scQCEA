@@ -11,6 +11,8 @@ The easiest way to generate an interactive summary QC report is to run the `RUN_
 3. Run the following command in rStudio to install scQCEA as an R package:
 
 ```{r,eval=FALSE}
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+
 library(devtools)
 devtools::install_github("walkerke/bsselectR")
 install_github("isarnassiri/scQCEA")
