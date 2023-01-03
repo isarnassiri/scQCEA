@@ -38,7 +38,8 @@ It is easy to create an interactive QC report for those who possess little or no
 #########################################################################
 
 library("scQCEA")
-GenerateInteractiveQCReport()
+InputDir=system.file("extdata", package = "scQCEA")
+GenerateInteractiveQCReport(InputDir)
 
 ############################################################ 
 #  Find the "Interactive QC Report" in the Outputs/ folder #
