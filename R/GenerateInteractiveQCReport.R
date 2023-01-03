@@ -46,7 +46,7 @@ GenerateInteractiveQCReport <- function(InputDir)
   invisible(file.remove(paste0(getwd(), '/CLICK_ME.html')));
   
   #--- Delete extra files
-  setwd(system.file("extdata/Outputs", package = "scQCEA")); 
+  setwd(paste0(InputDir, "/Outputs")); 
 
   list.dirs.depth.n <- function(p, n) {
     res <- list.dirs(p, recursive = FALSE)
@@ -70,10 +70,10 @@ GenerateInteractiveQCReport <- function(InputDir)
   invisible(unlink(listfiles, recursive = TRUE, force = TRUE));
   
   #--- generate zip file
-  setwd(system.file("extdata/", package = "scQCEA")); 
+  setwd(InputDir); 
   PInf = fread('Inputs/PInf.txt', stringsAsFactors = FALSE, header = FALSE);
   
-  setwd(system.file("extdata/Outputs", package = "scQCEA")); 
+  setwd(paste0(InputDir, "/Outputs"));
   zip(zipfile = paste0('OGC_Interactive_QC_Report_', gsub('.*=','',PInf$V1[1]),'.zip'), files = c('CLICK_ME.html', 'Inputs'), recurse = TRUE, include_directories = TRUE);
   
   invisible(file.remove(paste0(InputDir,'/','RMarkDown.Rmd')))
