@@ -23,15 +23,22 @@
 #'@title Generate Interactive QC Report
 #'@description An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
 #'@author {Isar Nassiri}
+#'@param InputDir
+#'Path of a folder including input files, called Inputs/
 #'@return You can find the results in R object under title of 'RESULTsGenomicFeatures' and 'RESULTsChromatinState'.
 #'@examples
 #'library("scQCEA")
+#'InputDir=system.file("extdata", package = "scQCEA")
 #'GenerateInteractiveQCReport()
 #'@export
 GenerateInteractiveQCReport <- NULL
-GenerateInteractiveQCReport <- function()
+GenerateInteractiveQCReport <- function(InputDir)
 {
-  setwd(system.file("extdata", package = "scQCEA")); 
+  
+  invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/','RMarkDown.Rmd'), InputDir))
+  invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/RMarkDown/'), InputDir, recursive=TRUE))
+  
+  setwd(InputDir)
   render("RMarkDown.Rmd", quiet = TRUE);
   
   invisible(file.rename('RMarkDown.html', 'CLICK_ME.html'));
@@ -69,8 +76,11 @@ GenerateInteractiveQCReport <- function()
   setwd(system.file("extdata/Outputs", package = "scQCEA")); 
   zip(zipfile = paste0('OGC_Interactive_QC_Report_', gsub('.*=','',PInf$V1[1]),'.zip'), files = c('CLICK_ME.html', 'Inputs'), recurse = TRUE, include_directories = TRUE);
   
+  invisible(file.remove(paste0(InputDir,'/','RMarkDown.Rmd')))
+  invisible(unlink(paste0(InputDir,'/RMarkDown/'), recursive=TRUE))
+  
   # ----------------------------------
-  cat(paste0("\033[0;", 47, "m", "You can find the Interactive QC Report in: ", "\033[0m","\n", system.file("extdata/Outputs/", package = "scQCEA")))
+  cat(paste0("\033[0;", 47, "m", "You can find the Interactive QC Report in: ", "\033[0m","\n", InputDir))
   
   # date()
   # sessionInfo()
