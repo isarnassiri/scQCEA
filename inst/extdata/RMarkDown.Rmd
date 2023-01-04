@@ -639,17 +639,14 @@ datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'F
 ```{r , eval=mxATAC, echo=FALSE}
 
 filenames =  list.files('Inputs/10X-arc', pattern = 'summary.csv', recursive = T)
-
 filenames = paste0('Inputs/10X-arc/', filenames)
 
 merged = rbindlist(lapply(filenames, fread))
 
-names = gsub('Inputs/10X-arc/|/outs/metrics_summary.csv|/outs/summary.csv','',filenames)
-merged = as.data.frame(merged)
+sample_arc = fread('Inputs/10X-arc/samples.arc', stringsAsFactors = F, header = F, sep = '\t')
+sample_arc = as.data.frame(sample_arc)
 
-QC = cbind(SequencingID = names, merged)
-
-QC = right_join(metadata[, c('LIMSID', 'Sample', 'SequencingID')], QC, by = 'SequencingID')
+QC = cbind(Description = sample_arc$V7, merged)
 
 datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'FixedColumns', 'ColReorder','Buttons'), options = list(
     buttons = c('copy', 'csv', 'excel', 'pdf', 'print', 'selectAll', 'selectNone', 'selectRows', 'selectColumns', 'selectCells'),
