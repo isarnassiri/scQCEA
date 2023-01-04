@@ -80,7 +80,7 @@ GenerateInteractiveQCReport <- function(InputDir)
   invisible(unlink(paste0(InputDir,'/RMarkDown/'), recursive=TRUE))
   
   # ----------------------------------
-  cat(paste0("\033[0;", 47, "m", "You can find the Interactive QC Report in: ", "\033[0m","\n", paste0(InputDir, 'Outputs')))
+  cat(paste0("\033[0;", 47, "m", "You can find the Interactive QC Report in: ", "\033[0m","\n", paste0(InputDir, '/Outputs/')))
   
   # date()
   # sessionInfo()
