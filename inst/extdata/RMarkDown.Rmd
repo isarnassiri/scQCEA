@@ -638,15 +638,20 @@ datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'F
 `r if(mxATAC){text_spec("Multiome ATAC + Gene Expression", background = "#D05A6E", color = "white", bold = T, font_size = 16)}`
 ```{r , eval=mxATAC, echo=FALSE}
 
-filenames =  list.files('Inputs/10X-arc', pattern = 'summary.csv', recursive = T)
+filenames = list.files('Inputs/10X-arc', pattern = 'summary.csv', recursive = T)
 filenames = paste0('Inputs/10X-arc/', filenames)
 
 merged = rbindlist(lapply(filenames, fread))
+merged = as.data.frame(merged)
+
+names = gsub('Inputs/10X-arc/|/outs/metrics_summary.csv|/outs/summary.csv','',filenames)
+merged = cbind(SequencingID = names, merged)
 
 sample_arc = fread('Inputs/10X-arc/samples.arc', stringsAsFactors = F, header = F, sep = '\t')
 sample_arc = as.data.frame(sample_arc)
+colnames(sample_arc)[1] = 'SequencingID'
 
-QC = cbind(Description = sample_arc$V7, merged)
+QC = merge(sample_arc[,c('SequencingID', 'V7')], merged, by = 'SequencingID')
 
 datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'FixedColumns', 'ColReorder','Buttons'), options = list(
     buttons = c('copy', 'csv', 'excel', 'pdf', 'print', 'selectAll', 'selectNone', 'selectRows', 'selectColumns', 'selectCells'),
