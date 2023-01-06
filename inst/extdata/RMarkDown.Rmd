@@ -650,8 +650,9 @@ merged = cbind(SequencingID = names, merged)
 sample_arc = fread('Inputs/10X-arc/samples.arc', stringsAsFactors = F, header = F, sep = '\t')
 sample_arc = as.data.frame(sample_arc)
 colnames(sample_arc)[1] = 'SequencingID'
+colnames(sample_arc)[which(colnames(sample_arc) == 'V7')] = 'Description'
 
-QC = merge(sample_arc[,c('SequencingID', 'V7')], merged, by = 'SequencingID')
+QC = merge(sample_arc[,c('SequencingID', 'Description')], merged, by = 'SequencingID')
 
 datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'FixedColumns', 'ColReorder','Buttons'), options = list(
     buttons = c('copy', 'csv', 'excel', 'pdf', 'print', 'selectAll', 'selectNone', 'selectRows', 'selectColumns', 'selectCells'),
