@@ -654,6 +654,8 @@ colnames(sample_arc)[which(colnames(sample_arc) == 'V7')] = 'Description'
 
 QC = merge(sample_arc[,c('SequencingID', 'Description')], merged, by = 'SequencingID')
 
+QC = QC[,-which(colnames(QC) == 'SequencingID')]
+
 datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'FixedColumns', 'ColReorder','Buttons'), options = list(
     buttons = c('copy', 'csv', 'excel', 'pdf', 'print', 'selectAll', 'selectNone', 'selectRows', 'selectColumns', 'selectCells'),
     select = list(style = 'os', items = 'row'),
