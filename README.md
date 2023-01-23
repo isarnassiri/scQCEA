@@ -99,5 +99,4 @@ CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
 ### Citation
-
-Isar Nassiri, Benjamin Fairfax, Angela Lee, Yanxia Wu, David Buck, Paolo Piazza. scQCEA: A Framework for Annotation and Quality Control Report of Single-Cell RNA-Sequencing Data. 
+Isar Nassiri, Benjamin Fairfax, Andrew J Kwok, Aneesha Bhandari, Katherine Bull, Angela Lee, Yanxia Wu, Julian Knight, David Buck, Paolo Piazza. Demultiplexing of Single Cell RNA Sequencing Data using Interindividual Variation in Gene Expression. 
