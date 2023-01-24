@@ -102,6 +102,9 @@ if(length(grep('HTO', metadata$`Library Type`))>0){HTO=TRUE}else{HTO=FALSE}
 metadata$`Library Type`[grep('10X SC RNA HTO-TSC', metadata$`Library Type`)] = '10X SC RNA CITE'
 metadata$`Library Type`[grep('10X SC RNA HTO-TSB', metadata$`Library Type`)] = '10X SC RNA CITE'
 
+metadata$`Library Type`[grep('10X SC RNA HTO-CITE-TSC', metadata$`Library Type`)] = '10X SC RNA CITE'
+metadata$`Library Type`[grep('10X SC RNA HTO-CITE-TSB', metadata$`Library Type`)] = '10X SC RNA CITE'
+
 metadata$`Library Type`[grep('10X SC ATAC', metadata$`Library Type`)] = '10X SC ATAC'
 
 Applications = c('10X SC RNA CITE',
