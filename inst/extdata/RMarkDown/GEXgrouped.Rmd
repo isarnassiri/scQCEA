@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-In the grouped count pipeline, one sample is processed through one GEM well, resulting in one library which is sequenced across multiple flowcells. This workflow is commonly performed to increase sequencing depth. In this case, all reads can be combined in a single instance of the cellranger count pipeline. Finally, the pipelines perform secondary analyses like dimensionality reduction, clustering, and differential analysis.
+In the grouped count pipeline, one sample is processed through one GEM well, resulting in one library which is sequenced across multiple flowcells. This workflow is commonly performed to increase sequencing depth. In this case, all reads can be combined in a single instance of the cellranger count pipeline. Finally, the pipelines perform secondary analysis like dimensionality reduction, clustering, and differential analysis.
 
 ```{r, echo = FALSE}
 appliation='CellRanger/7.0 count';
@@ -32,7 +32,7 @@ DiagrammeR::grViz("
   [2]: appliation[1]
   [3]: 'Generation of metadata'
   [4]: 'Merging multiple sequencing runs'
-  [5]: 'Secondary analyses'
+  [5]: 'Secondary analysis'
   ",
   height = 100)
 ```

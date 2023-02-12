@@ -396,7 +396,7 @@ datatable(QC, extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'F
 ```
 
 
-`r if(HTO){text_spec("Integrating scRNA-seq and feature barcode data", background = "#D05A6E", color = "white", bold = T, font_size = 16)}`
+`r if(HTO){text_spec("Demultiplexing cell barcodes by HTO tags", background = "#D05A6E", color = "white", bold = T, font_size = 16)}`
 
 ```{r , eval=CITE, eval=HTO, echo=FALSE}
 
@@ -840,7 +840,7 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 `r if(GEX){"#### Quantification Summary Statistics Plot(s)"}`
 `r if(GEX){text_spec("Samples", background = "#38d199", color = "white", bold = T, font_size = 14)}`
 
-```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purpule colour), and filter out the cells (Background) which did not enrich with any cell type.'}
+```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purple colour), and filter out the cells (Background) which did not enrich with any cell type.'}
 
 state_plots =  list.files('Inputs/10X-gex', pattern = '_TotalUMIvsDetectedGenes.png', recursive = T)
 
@@ -854,7 +854,7 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 `r if(GEXgrouped){"#### Quantification Summary Statistics Plot(s) GML"}`
 `r if(GEXgrouped){text_spec("Samples", background = "#38d199", color = "white", bold = T, font_size = 14)}`
 
-```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purpule colour), and filter out the cells (Background) which did not enrich with any cell type.'}
+```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purple colour), and filter out the cells (Background) which did not enrich with any cell type.'}
 
 state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_TotalUMIvsDetectedGenes.png', recursive = T)
 
@@ -879,7 +879,7 @@ names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRa
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
 
-`r if(GEX){"#### Barcode Rank Plot(s) - Refinded"}`
+`r if(GEX){"#### Barcode Rank Plot(s) - Refined"}`
 `r if(GEX){text_spec("Samples", background = "#38d199", color = "white", bold = T, font_size = 14)}`
 
 ```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The cell-type specific enrichment analysis was applied to discriminate between true variation and background noise, and refine the results. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
@@ -907,7 +907,7 @@ names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRa
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
 
-`r if(GEXgrouped){"#### Barcode Rank Plot(s) GML - Refinded"}`
+`r if(GEXgrouped){"#### Barcode Rank Plot(s) GML - Refined"}`
 `r if(GEXgrouped){text_spec("GML: Grouped Multiple Libraries per sample", background = "#38d199", color = "white", bold = T, font_size = 14)}`
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The cell-type specific enrichment analysis was applied to discriminate between true variation and background noise, and refine the results. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
@@ -929,4 +929,4 @@ copyDirectory("Inputs", to="Outputs/Inputs", recursive=TRUE)
 ```
 
 ### `r kableExtra::text_spec("Link for Further Information", color = "blue")` 
-The analysis, gene count matrix, and reports have been copied to the "additional_analyses" folder on the FTP server ([LINK](ftp://`r ProjectNameFTP_Path`:`r ProjectNameFTP_password`@bsg-ftp.well.ox.ac.uk/)).
+The analysis, gene count matrix, and reports have been copied to the "additional_analysis" folder on the FTP server ([LINK](ftp://`r ProjectNameFTP_Path`:`r ProjectNameFTP_password`@bsg-ftp.well.ox.ac.uk/)).

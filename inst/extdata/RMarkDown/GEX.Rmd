@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-Cellranger count takes FASTQ files from cellranger mkfastq and performs alignment, filtering, barcode counting, and UMI counting. It uses the Chromium cellular barcodes to generate feature-barcode matrices, determine clusters, and perform gene expression analysis. In the count pipeline, one sample is processed through one GEM well and sequenced on one flowcell. In this case, generate FASTQs using cellranger mkfastq and run cellranger count as Single-Sample Analysis. Additionally, the pipelines perform secondary analyses like dimensionality reduction, clustering, and differential analysis.
+Cellranger count takes FASTQ files from cellranger mkfastq and performs alignment, filtering, barcode counting, and UMI counting. It uses the Chromium cellular barcodes to generate feature-barcode matrices, determine clusters, and perform gene expression analysis. In the count pipeline, one sample is processed through one GEM well and sequenced on one flowcell. In this case, generate FASTQs using cellranger mkfastq and run cellranger count as Single-Sample analysis. Additionally, the pipelines perform secondary analysis like dimensionality reduction, clustering, and differential analysis.
 
 ```{r, echo = FALSE}
 appliation='CellRanger/7.0 count';
@@ -30,7 +30,7 @@ DiagrammeR::grViz("
   [1]: 'bcl2fastq'
   [2]: appliation[1]
   [3]: 'Generation of metadata'
-  [4]: 'Secondary analyses'
+  [4]: 'Secondary analysis'
   ",
   height = 100)
 ```

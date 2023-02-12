@@ -11,7 +11,7 @@ The Single Cell Multiome ATAC + Gene Expression software suite consists of Cell 
 
 Cell Ranger ARC performs sample demultiplexing, barcode processing, identification of open chromatin regions, and simultaneous counting of transcripts and peak accessibility in single cells. 
 
-Additionally, the pipelines perform secondary analyses like dimensionality reduction, clustering, differential analysis, and feature linkage between peaks and genes that aid in data interpretation.
+Additionally, the pipelines perform secondary analysis like dimensionality reduction, clustering, differential analysis, and feature linkage between peaks and genes that aid in data interpretation.
 
 ```{r, echo = FALSE}
 appliation='Cell Ranger ARC v2.0';
@@ -34,7 +34,7 @@ DiagrammeR::grViz("
   [1]: 'bcl2fastq'
   [2]: appliation[1]
   [3]: 'Generation of metadata'
-  [4]: 'Secondary analyses'
+  [4]: 'Secondary analysis'
   ",
   height = 100)
 ```
