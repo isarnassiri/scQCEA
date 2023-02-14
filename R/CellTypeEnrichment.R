@@ -124,6 +124,10 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   
   # ---------------------------------- save cell assignments as a heatmap
   assignmentMat <- table(assignmentTable[,"geneSet"], assignmentTable[,"cell"])
+  
+  assignmentMat = assignmentMat[!duplicated(rowSums(assignmentMat)),]
+  dim(assignmentMat)
+  
   aheatmap(assignmentMat, scale="none", color="-RdYlBu2:100", legend=FALSE, filename = paste0(output.dir_perSample, '/', 'Celltype_assignment_HeatMap.png'), height = 10, width = 8)
   
   # ---------------------------------- check if any cells assigned in more than one cell type
