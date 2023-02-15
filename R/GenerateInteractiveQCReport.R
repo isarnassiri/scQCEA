@@ -35,7 +35,7 @@ GenerateInteractiveQCReport <- NULL
 GenerateInteractiveQCReport <- function(InputDir)
 {
   
-  setwd(InputDir);
+  setwd(InputDir)
   SamplesMetadata = fread('Inputs/samples.metadata', stringsAsFactors = FALSE, header = TRUE);
   
   #- For human or mouse input files we run enrichment analysis
