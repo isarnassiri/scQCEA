@@ -1,0 +1,256 @@
+
+<!-- Insert a logo in upper right corner of R markdown html document -->
+  
+```{r, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+
+PInf = fread('Inputs/PInf.txt', stringsAsFactors = F, header = F)
+
+ProjectName <- gsub('.*=','',PInf$V1[1])
+ProjectNameFTP_Path <- gsub('.*=','',PInf$V2[1])
+ProjectNameFTP_password <- gsub('.*=','',PInf$V3[1])
+
+PM <- gsub(' \t','',PInf$V2[2])
+premade = TRUE
+
+invisible(file.copy(from = 'RMarkDown/OGC_logo.jpeg', to = "Inputs/OGC_logo.jpeg"));
+invisible(file.copy(from = 'RMarkDown/Experimental_Data.txt', to = "Inputs/Experimental_Data.txt"));
+
+htmltools::img(src = knitr::image_uri("Inputs/OGC_logo.jpeg"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0; padding:10px; out.width = "5px";')
+```
+
+---
+title: "Project `r ProjectName` Workflow and Results"
+date: "Report compiled on `r format(Sys.time(), '%d %B, %Y')`"
+author: "Project Manager: `r PM`"
+
+output:
+  html_document:
+    self_contained = TRUE
+  css: "style.css"
+code_download: true
+params: 
+  output_dir: "../foobar"
+---
+
+```{css, echo=FALSE}
+p {
+  font-size: 13px;
+}
+
+h1.title {
+  font-size: 38px;
+  color: DarkRed;
+  text-align: center;
+}
+h3.subtitle {
+  font-size: 17px;
+  color: DarkBlue;
+  text-align: center;
+}
+h4.author {
+  font-size: 16px;
+  color: DarkGreen;
+  text-align: center;
+}
+h4.date { /* Header 4 - and the author and data headers use this too  */
+    font-size: 16px;
+  font-family: "Times New Roman", Times, serif;
+  color: bg-palevioletred1;
+  text-align: center;
+}
+
+```
+
+### Workflows
+
+#### Workflow of scRNA sequencing
+scRNAseq transcriptome processing was performed using the Chromium 10x system involving GEM generation, post GEM-generation clean-up, cDNA amplification and DNA quantification. The library was sequencing using the Illumina NovaSeq platform. 
+
+#### Experimental Workflow
+```{r, echo=FALSE}
+
+Experimental_Data = fread('Inputs/Experimental_Data.txt', stringsAsFactors = F, header = T)
+
+# Chemistry=Experimental_Data$Chemistry
+Av_cell=Experimental_Data$Av_cell
+Av_Viability=Experimental_Data$Av_Viability
+vCell_Suspension=Experimental_Data$vCell_Suspension
+Capture_efficiency=Experimental_Data$Capture_efficiency
+Av_Num_Cells_to_Load=Experimental_Data$Av_Num_Cells_to_Load
+```
+
+```{r readMetaData, echo=FALSE}
+metadata = fread('Inputs/samples.metadata', stringsAsFactors = F, header = T)
+
+Chemistry=unique(metadata$`Library Type`)
+
+metadata$`Library Type`[grep('10X SC RNA 5pr', metadata$`Library Type`)] = '10X SC RNA GEX'
+metadata$`Library Type`[grep('10X SC RNA 3pr', metadata$`Library Type`)] = '10X SC RNA GEX'
+metadata$`Library Type`[grep('10X SC mxRNA', metadata$`Library Type`)] = '10X SC RNA GEX'
+
+metadata$`Library Type`[grep('10X SC VDJ BCR', metadata$`Library Type`)] = '10X SC VDJ'
+metadata$`Library Type`[grep('10X SC VDJ TCR', metadata$`Library Type`)] = '10X SC VDJ'
+
+metadata$`Library Type`[grep('10X SC RNA CITE-TSC', metadata$`Library Type`)] = '10X SC RNA CITE'
+metadata$`Library Type`[grep('10X SC RNA CITE-TSB', metadata$`Library Type`)] = '10X SC RNA CITE'
+
+if(length(grep('HTO', metadata$`Library Type`))>0){HTO=TRUE}else{HTO=FALSE}
+
+metadata$`Library Type`[grep('10X SC RNA HTO-TSC', metadata$`Library Type`)] = '10X SC RNA CITE'
+metadata$`Library Type`[grep('10X SC RNA HTO-TSB', metadata$`Library Type`)] = '10X SC RNA CITE'
+
+metadata$`Library Type`[grep('10X SC RNA HTO-CITE-TSC', metadata$`Library Type`)] = '10X SC RNA CITE'
+metadata$`Library Type`[grep('10X SC RNA HTO-CITE-TSB', metadata$`Library Type`)] = '10X SC RNA CITE'
+
+metadata$`Library Type`[grep('10X SC ATAC', metadata$`Library Type`)] = '10X SC ATAC'
+
+Applications = c('10X SC RNA CITE',
+'10X SC RNA GEX',  
+'10X SC VDJ',
+'10X SC RNA HTO-CMO',
+'10X SC mxATAC',
+'10X SC ATAC')
+
+Applications_in_metatData = which(Applications %in% unique(metadata$`Library Type`))
+
+ApplicationsSelected <- logical(length(Applications)) 
+names(ApplicationsSelected) = c('CITE', 'GEX', 'VDJ', 'CMO', 'mxATAC', 'ATAC')
+ApplicationsSelected[Applications_in_metatData] = TRUE;
+
+for(i in 1:length(ApplicationsSelected))
+{
+  assign(names(ApplicationsSelected[i]), as.logical(ApplicationsSelected[i]))
+}
+
+#----- select grouped application
+
+Applications_in_metatData_raw = unique(metadata$`Library Type`)
+
+# NOTE: REVISE THE METADATA FILE ACCORDINGLY
+Name_index = data.frame(Applications_name = c('10X SC RNA CITE',
+'10X SC RNA GEX',  
+'10X SC VDJ',
+'10X SC RNA HTO-CMO',
+'10X SC mxATAC',
+'10X SC ATAC'),
+Applications_index = c('CITE', 'GEX', 'VDJ', 'CMO', 'mxATAC', 'ATAC'), stringsAsFactors = F)
+
+#-- function for Assign multiple variables
+assignVec <- Vectorize("assign", c("x", "value"))
+`%<<-%` <- function(x, value) invisible(assignVec(x, value, envir = .GlobalEnv))
+
+#-- assign all applications as without grouping
+paste0(Name_index[,'Applications_index'],'grouped') %<<-% replicate(length(Name_index[,'Applications_index']),FALSE)
+
+#-- assign application with grouping
+for(i in 1:length(Applications_in_metatData_raw))
+  {
+    if(any(duplicated(metadata[grep(Applications_in_metatData_raw[i], metadata$`Library Type`),'LIMS ID']))){
+      assign(paste0(Name_index[which(Name_index$Applications_name == Applications_in_metatData_raw[i]),'Applications_index'],'grouped'), TRUE)
+  }
+}
+
+application=gsub(" ", "', and '",capture.output(cat(names(ApplicationsSelected[Applications_in_metatData]))))
+
+```
+
+Chromium Single Cell Reagent Kits solution (`r Chemistry` Chemistry) was used to deliver a scalable microfluidic platform for digital `r application` by profiling 500-10,000 individual cells per sample. A pool of ~3,500,000 10x Barcodes were sampled separately to index each cell’s transcriptome. It is done by partitioning thousands of cells into nanoliter-scale Gel Beads-in-emulsion (GEMs), where all generated cDNA share a common 10x Barcode. Libraries were generated and sequenced from the cDNAs and 10x Barcodes were used to associate individual reads back to the individual partitions. 
+
+<!-- Average of sample concentration was `r Av_cell` $\times 10^5$ cells/ml, average viability `r Av_Viability`, and average cell suspension `r vCell_Suspension`. The average cell-capture efficiency of library pooling was `r Capture_efficiency`, relative to `r Av_Num_Cells_to_Load` average number of cells loaded on the instrument. -->
+
+#### Data processing Workflow
+Analysis pipeline is applied to process Chromium single-cell data to align reads, generate feature-barcode matrices, perform clustering and other secondary analysis. Illumina's bcl2fastq and cellranger mkfastq demultiplexes are used to convert the raw base call (BCL) files generated by Illumina sequencers into FASTQ files.
+
+```{r , child='RMarkDown/GEX.Rmd', eval=GEX, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/GEXgrouped.Rmd', eval=GEXgrouped, echo=FALSE}
+
+```
+ 
+```{r , child='RMarkDown/VDJ.Rmd', eval=VDJ, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/VDJgrouped.Rmd', eval=VDJgrouped, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/CMO.Rmd', eval=CMO, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/CMOgrouped.Rmd', eval=CMOgrouped, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/mxATAC.Rmd', eval=mxATAC, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/mxATACgrouped.Rmd', eval=mxATACgrouped, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/ATAC.Rmd', eval=ATAC, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/ATACgrouped.Rmd', eval=ATACgrouped, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/CITE.Rmd', eval=CITE, echo=FALSE}
+
+```
+
+```{r , child='RMarkDown/CITEgrouped.Rmd', eval=CITEgrouped, echo=FALSE}
+
+```
+
+### Samples information and QC metrics {.tabset}
+
+#### Meta data
+
+Metadata is created at multiple points throughout the pipeline. This document includes information about the size of the batch load and resources that can be used to conduct QC.
+
+```{r, class.output="scroll-10", echo=FALSE}  
+
+metadata = fread('Inputs/samples.metadata', stringsAsFactors = F, header = T)
+
+colnames(metadata) = c('ProjectNumber', 'LIMSID', 'Sample', 'Name', 'IndexLibrary', 'TypeGenome', 'FlowcellID', 'LaneNumber', 'SequencingID')
+
+metadata = as.data.frame(metadata)
+metadata = metadata[order(metadata$Sample),]
+#retrieve row numbers after sorting
+row.names(metadata) = 1:dim(metadata)[1]
+
+datatable(metadata[,-which(colnames(metadata) %in% c('ProjectNumber', 'Name'))], extensions = c('Select', 'Scroller', 'KeyTable', 'FixedHeader', 'FixedColumns', 'ColReorder','Buttons'), options = list(
+    buttons = c('copy', 'csv', 'excel', 'pdf', 'print', 'selectAll', 'selectNone', 'selectRows', 'selectColumns', 'selectCells'),
+    select = list(style = 'os', items = 'row'),
+    dom = 'Blfrtip',
+    rowId = 0,
+    colReorder = TRUE,
+    scrollX = TRUE,
+    fixedColumns = TRUE,
+    keys = TRUE,
+    deferRender = TRUE,
+    scrollY = 200,
+    scroller = TRUE,
+    pageLength = 5, autoWidth = TRUE, fixedHeader = F)) %>%
+  formatStyle(columns = colnames(.$x$data), `font-size` = '12px')
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(R.utils)
+copyDirectory("Inputs", to="Outputs/Inputs", recursive=TRUE)
+```
+
+### `r kableExtra::text_spec("Link for Further Information", color = "blue")` 
+The analysis, gene count matrix, and reports have been copied to the "additional_analysis" folder on the FTP server ([LINK](ftp://`r ProjectNameFTP_Path`:`r ProjectNameFTP_password`@bsg-ftp.well.ox.ac.uk/)).

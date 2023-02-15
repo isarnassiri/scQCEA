@@ -35,9 +35,23 @@ GenerateInteractiveQCReport <- NULL
 GenerateInteractiveQCReport <- function(InputDir)
 {
   
-  invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/','RMarkDown.Rmd'), InputDir))
-  invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/RMarkDown/'), InputDir, recursive=TRUE))
+  setwd(InputDir);
+  library(data.table)
+  setwd('/Users/isar/Documents/GitHub/scQCEA/inst/extdata/')
+  InputDir = '/Users/isar/Downloads/'
+  SamplesMetadata = fread('Inputs/samples.metadata', stringsAsFactors = FALSE, header = TRUE);
   
+  #- For human or mouse input files we run enrichment analysis
+  (length(grep('GRCh38|GRCm38', SamplesMetadata$Genome)) > 0)
+  {
+    invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/','RMarkDown.Rmd'), InputDir))
+    invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/RMarkDown/'), InputDir, recursive=TRUE))
+  }else{
+    invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/','RMarkDown-nonHumanMouse.Rmd'), InputDir))
+    invisible(file.rename('RMarkDown-nonHumanMouse.Rmd', 'RMarkDown.Rmd'))
+    invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/RMarkDown/'), InputDir, recursive=TRUE))
+  }
+
   setwd(InputDir)
   render("RMarkDown.Rmd", quiet = TRUE);
   
