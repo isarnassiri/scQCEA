@@ -36,9 +36,6 @@ GenerateInteractiveQCReport <- function(InputDir)
 {
   
   setwd(InputDir);
-  library(data.table)
-  setwd('/Users/isar/Documents/GitHub/scQCEA/inst/extdata/')
-  InputDir = '/Users/isar/Downloads/'
   SamplesMetadata = fread('Inputs/samples.metadata', stringsAsFactors = FALSE, header = TRUE);
   
   #- For human or mouse input files we run enrichment analysis
