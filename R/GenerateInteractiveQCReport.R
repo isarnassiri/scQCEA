@@ -42,7 +42,7 @@ GenerateInteractiveQCReport <- function(InputDir)
   SamplesMetadata = fread('Inputs/samples.metadata', stringsAsFactors = FALSE, header = TRUE);
   
   #- For human or mouse input files we run enrichment analysis
-  (length(grep('GRCh38|GRCm38', SamplesMetadata$Genome)) > 0)
+  if(length(grep('GRCh38|GRCm38', SamplesMetadata$Genome)) > 0)
   {
     invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/','RMarkDown.Rmd'), InputDir))
     invisible(file.copy(paste0(system.file("extdata", package = "scQCEA"),'/RMarkDown/'), InputDir, recursive=TRUE))
