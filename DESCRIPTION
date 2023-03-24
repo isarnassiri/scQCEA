@@ -1,14 +1,20 @@
-Package: scQCEA
-Title: scQCEA: Single-cell RNA Sequencing Quality Control and Enrichment Analysis
-Version: 0.99.1
-Description: scQCEA (acronym of the single-cell RNA sequencing Quality Control and Enrichment Analysis) is an R package for annotation and quality control report of scRNA-Seq profiles, which performs a probabilistic assignment of the reference cell types to identify clusters, before downstream analysis such as gene network inference. scQCEA provides automated cell type annotation on scRNA-seq data and identifies differential patterns in gene expression. scQCEA generates an interactive report of quality control metrics which allows visual evaluation of QC metrics, objective selection of insightful optimal cluster numbers and discrimination between true variation and background noise.
-Depends: R (>= 4.1), DropletUtils, Matrix, data.table, DT, NMF, plotly, stringr, dplyr, AUCell, GSEABase, GEOquery, ggplot2, rstudioapi, reshape2, DiagrammeR, R.utils, bsselectR, devtools, downloadthis, kableExtra, readr, rmarkdown, zip
-License: GPL-2
+Package: bsselectR
+Type: Package
+Title: Display Text, Images, and IFrames interactively in R Markdown with the
+    bootstrap-select jQuery Plugin
+Version: 0.1.0
+Date: 2016-12-09
+Authors@R: c(person(given="Kyle", family="Walker", email="kyle.walker@tcu.edu", role=c("aut", "cre")))
+Description: Allows R users to interactively display text, images, and iframes
+    in R Markdown documents without the use of Shiny. Dropdown menus are styled with
+    the bootstrap-select jQuery plugin.
+License: MIT
 Encoding: UTF-8
-LazyData: false
-RoxygenNote: 7.2.1
-biocViews: GeneExpression, Transcription, Sequencing, Microarray, SingleCell, Transcriptomics, Coverage,  QualityControl, ImmunoOncology, GeneSetEnrichment, WorkflowStep, GO
-Suggests: knitr, rmarkdown
-VignetteBuilder: knitr
-NeedsCompilation: no 
-Authors@R: c(person("Isar", "Nassiri", email="isar.nassiri@oncology.ox.ac.uk", role = c("aut","cre")))
+LazyData: true
+Depends:
+    R (>= 3.0.0)
+Imports:
+    rmarkdown,
+    htmlwidgets,
+    htmltools
+RoxygenNote: 5.0.1
