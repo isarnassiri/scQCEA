@@ -271,12 +271,8 @@ The function applies the area under the curve and bimodal distribution to separa
 
 The required inputs are a gene-cell count matrix (outs/read_count.csv), feature-barcode matrices (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/matrices), tSNE and UMAP projections from 10X CellRanger count (analysis/.../projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/analysis), and a repository of reference gene sets (Figure 7).
 
-We used Human Protein Atlas database (version 21.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 68 reference gene sets, and 2318 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/main/Scripts/ReferenceGeneSets). The repository of reference genes covers human and mouse genes with the possibility to expand it to other species (Figure 9). 
-
-| <img src="Supp_Figure_1.png" width="450" height="570"> | 
-|:--:| 
-| *Figure 9. Summary of gene sets in the repository of reference dataset for cell-type enrichment analysis.* |
-
+We used Human Protein Atlas database (version 21.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 68 reference gene sets, and 2318 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/main/Scripts/ReferenceGeneSets). The repository of reference genes covers human and mouse genes with the possibility to expand it to other species. 
+ 
 ### Example of Application
 
 To demonstrate the utility of scQCEA, we apply the workflow to the sixteen gene expression profiles of eight patients with metastatic melanoma, prepared from pre- and post-treatment experimental batches (Fairfax, et al., 2020). Download and unzip the `OGC_Interactive_QC_Report_ P180121.zip` file available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Example-of-Application). You can open `CLICK_ME.html` file inside the unzipped folder without using rStudio/R.
