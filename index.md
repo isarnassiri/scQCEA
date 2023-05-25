@@ -293,9 +293,12 @@ t=$(wc -l 'gex_aggregation')
 qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 ```
 
-CellTypeEnrichment_Multiple_Samples.sh
+You need to copy the files in the following directory to the folder of inputs files and modify line 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depend to the set up of the HPC:
+
+
 
 **On a Desktop Computer:**
+
 As an alternative, you can run the `CellTypeEnrichment()` function in loop for multiple inputs. Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample name (e.g., HAN9935A100), a gene-cell count matrix path (e.g., ~/P220386/10X-gex/HAN9935A100), a repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome name (e.g., hsapiens). Read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each rows as input prameters of `CellTypeEnrichment()` function.
 
 ### Example of Application
