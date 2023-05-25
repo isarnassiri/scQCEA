@@ -272,7 +272,19 @@ The function applies the area under the curve and bimodal distribution to separa
 The required inputs are a gene-cell count matrix (outs/read_count.csv), feature-barcode matrices (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/matrices), tSNE and UMAP projections from 10X CellRanger count (analysis/.../projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/analysis), and a repository of reference gene sets (Figure 7).
 
 We used Human Protein Atlas database (version 22.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 95 reference gene sets, and 2348 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/main/Scripts/ReferenceGeneSets). The repository of reference genes covers human and mouse genes with the possibility to expand it to other species. 
- 
+
+### Run Cell Type Enrichment Analysis for Multiple Samples
+**On the HPC Cluster:**
+Create a tab-separated file with input data set name (e.g., P220386), sample name (e.g., HAN9935A100), a gene-cell count matrix path (e.g., ~/P220386/10X-gex/HAN9935A100), a repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome name (e.g., hsapiens). Use this file to submit samples as input for  and use it with an apply, so a function processes the df row-by-row. Let's say the file (named metadata.txt) is:
+
+```{r,eval=FALSE}
+P220386 HAN9935A100     ~/P220386/10X-gex/HAN9935A100    ~/references/reference_gene_sets/human   hsapiens
+P220386 HAN9935A101     ~/P220386/10X-gex/HAN9935A101    ~/references/reference_gene_sets/human   hsapiens
+P220386 HAN9935A102     ~/P220386/10X-gex/HAN9935A102    ~/references/reference_gene_sets/human   hsapiens
+```
+
+CellTypeEnrichment_Multiple_Samples.sh
+
 ### Example of Application
 
 To demonstrate the utility of scQCEA, we apply the workflow to the sixteen gene expression profiles of eight patients with metastatic melanoma, prepared from pre- and post-treatment experimental batches (Fairfax, et al., 2020). Download and unzip the `OGC_Interactive_QC_Report_ P180121.zip` file available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Example-of-Application). You can open `CLICK_ME.html` file inside the unzipped folder without using rStudio/R.
