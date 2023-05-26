@@ -37,27 +37,33 @@
 #'@param RawFeatureDir
 #'A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
 #'@param FilteredFeatureBarcodes
-#'#'A folder including filtered feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz)
+#'A folder including filtered feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz)
 #'@param SampleName
 #'Name of an indicated sample
+#'@param nCores
+#'Number of cores to use for computation.
+#'@param aucMaxRank
+#'Number of expressed/detected genes that are going to be used to calculate the AUC. As a default, the first 250 genes are used to calculate the AUC.
 #'@return You can find the results in R object under title of 'RESULTsGenomicFeatures' and 'RESULTsChromatinState'.
 #'@examples
-#'library("scQCEA")
-#'csQCEAdir <- system.file("extdata", package = "scQCEA")
-#'DataTyep <- '10X-gex'
-#'SampleName <- '481207_03'
-#'SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
-#'ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
-#'GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
-#'BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
-#'tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
-#'UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
-#'RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
-#'FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
-#'CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
+# library("scQCEA")
+# csQCEAdir <- system.file("extdata", package = "scQCEA")
+# DataTyep <- '10X-gex'
+# SampleName <- '481207_03'
+# SamplesMetadata = paste(csQCEAdir, 'Inputs/samples.metadata', sep = '/' )
+# ReadCount = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs', sep = '/')
+# GTF = paste(csQCEAdir, 'ensembl_human.txt', sep = '/')
+# BackendDataDir = paste(csQCEAdir, 'ReferenceGeneSets/', sep = '/')
+# tSNECellranger = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/tsne/gene_expression_2_components', sep = '/')
+# UMAPCellranger =  paste(csQCEAdir, 'Inputs', DataTyep, SampleName, '/outs/analysis/umap/gene_expression_2_components', sep = '/')
+# RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_feature_bc_matrix', sep = '/')
+# FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
+# aucMaxRank = 250;
+# nCores = 1;
+# CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes )
 #'@export
 CellTypeEnrichment <- NULL
-CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes )
+CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes, aucMaxRank = 250, nCores = 1 )
 {
   # ---------------------------------- Create output directory
   output.dir_perSample <- paste(csQCEAdir, 'Inputs', DataTyep, SampleName, sep = '/')
@@ -108,9 +114,9 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   # ---------------------------------- AUCell
   exprMatrix <- as.matrix(TP_profile_sub)
   cells_rankings <- AUCell_buildRankings(exprMatrix)
-  
+
   # ---------------------------------- reports Genes in the gene sets NOT available in the dataset
-  cells_AUC <- AUCell_calcAUC(geneSets, cells_rankings, nCores=1)
+  cells_AUC <- AUCell_calcAUC(geneSets, cells_rankings, nCores=nCores, aucMaxRank = aucMaxRank)
   
   # ---------------------------------- cells assignment
   selectedThresholds <- NULL
