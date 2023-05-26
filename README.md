@@ -102,7 +102,7 @@ nCores = 1
 aucMaxRank = 250
 # Number of expressed/detected genes that are going to be used to calculate the AUC. As a default, the first 250 genes are used to calculate the AUC.
 
-CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
+CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes, aucMaxRank = 250, nCores = 1 )
 ``` 
 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
