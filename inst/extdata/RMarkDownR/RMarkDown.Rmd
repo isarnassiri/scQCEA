@@ -756,11 +756,11 @@ We applied the area under the curve and bimodal distribution to separate the dis
   
 ```{r, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='Uniform Manifold Approximation and Projection (UMAP) projection of transcriptionally and functionally distinct clusters, highlighted by cell type group. UMAP constructs a high-dimensional graph representation of the data, then builds a low-dimensional graph that is as structurally similar as possible. '}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_UMAP_Plot.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'UMAP_Plot.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_UMAP_Plot.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("UMAP_Plot.png" = "", "Inputs/10X-gex/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 700)
 ```
@@ -770,11 +770,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='Uniform Manifold Approximation and Projection (UMAP) projection of transcriptionally and functionally distinct clusters, highlighted by cell type group. UMAP constructs a high-dimensional graph representation of the data, then builds a low-dimensional graph that is as structurally similar as possible. '}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_UMAP_Plot.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'UMAP_Plot.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_UMAP_Plot.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("UMAP_Plot.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 700)
 ```
@@ -784,11 +784,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='t-stochastic neighbor embedding (t-SNE) projection of transcriptionally and functionally distinct clusters, highlighted by cell type group.'}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_tSNE_Plot.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'tSNE_Plot.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_tSNE_Plot.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("tSNE_Plot.png" = "", "Inputs/10X-gex/" = "")))
  
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 700)
 ```
@@ -798,11 +798,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='t-stochastic neighbor embedding (t-SNE) projection of transcriptionally and functionally distinct clusters, highlighted by cell type group.'}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_tSNE_Plot.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'tSNE_Plot.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_tSNE_Plot.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("tSNE_Plot.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 700)
 ```
@@ -814,11 +814,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='Heatmap based on cells showing the most enriched expressed genes in each cell type group. Red cells passed the threshold. '}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_HeatMap.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'HeatMap.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_Celltype_assignment_HeatMap.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("Celltype_assignment_HeatMap.png" = "", "Inputs/10X-gex/" = "")))
  
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -828,11 +828,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='Heatmap based on cells showing the most enriched expressed genes in each cell type group. Red cells passed the threshold.'}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_Celltype_assignment_HeatMap.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'Celltype_assignment_HeatMap.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_Celltype_assignment_HeatMap.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("Celltype_assignment_HeatMap.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -842,11 +842,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purple colour), and filter out the cells (Background) which did not enrich with any cell type.'}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_TotalUMIvsDetectedGenes.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'TotalUMIvsDetectedGenes.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_TotalUMIvsDetectedGenes.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("TotalUMIvsDetectedGenes.png" = "", "Inputs/10X-gex/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -856,11 +856,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The total UMI vs detected genes plot shows the distribution of total UMI versus total numer of detected genes. The cell-type specific enrichment analysis was applied to discriminate between true variation (Cells, gray colour) and background noise (Background, purple colour), and filter out the cells (Background) which did not enrich with any cell type.'}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_TotalUMIvsDetectedGenes.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'TotalUMIvsDetectedGenes.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_TotalUMIvsDetectedGenes.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("TotalUMIvsDetectedGenes.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -870,11 +870,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_BarcodeRankPlot_10X.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'BarcodeRankPlot_10X.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRankPlot_10X.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("BarcodeRankPlot_10X.png" = "", "Inputs/10X-gex/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -884,11 +884,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEX, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The cell-type specific enrichment analysis was applied to discriminate between true variation and background noise, and refine the results. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
 
-state_plots =  list.files('Inputs/10X-gex', pattern = '_BarcodeRankPlot_EB.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex', pattern = 'BarcodeRankPlot_EB.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRankPlot_EB.png" = "", "Inputs/10X-gex/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("BarcodeRankPlot_EB.png" = "", "Inputs/10X-gex/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -898,11 +898,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_BarcodeRankPlot_10X.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'BarcodeRankPlot_10X.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRankPlot_10X.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("BarcodeRankPlot_10X.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
@@ -912,11 +912,11 @@ bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_searc
 
 ```{r, eval=GEXgrouped, out.width="100%", out.height="100%", echo = FALSE, , fig.cap='The Barcode Rank Plot shows the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The cell-type specific enrichment analysis was applied to discriminate between true variation and background noise, and refine the results. The y-axis shows the value that cellranger-dna uses to call cells and the x-axis is the number of barcodes below that value.'}
 
-state_plots =  list.files('Inputs/10X-gex-grouped', pattern = '_BarcodeRankPlot_EB.png', recursive = T)
+state_plots =  list.files('Inputs/10X-gex-grouped', pattern = 'BarcodeRankPlot_EB.png', recursive = T)
 
 state_plots = paste0('Inputs/10X-gex-grouped/', state_plots)
 
-names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("_BarcodeRankPlot_EB.png" = "", "Inputs/10X-gex-grouped/" = "")))
+names(state_plots) <- gsub('\\/.*','',str_replace_all(state_plots, c("BarcodeRankPlot_EB.png" = "", "Inputs/10X-gex-grouped/" = "")))
 
 bsselect(state_plots, type = "img", selected = names(state_plots)[1], live_search = TRUE, show_tick = TRUE, frame_height = 900)
 ```
