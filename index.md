@@ -3,7 +3,7 @@
 ### Introduction 
 This documentation gives an introduction and usage manual of scQCEA (acronym of the single-cell RNA sequencing Quality Control and Enrichment Analysis) an R package for annotation and quality control report of scRNA-Seq profiles. It generates an interactive report of quality control metrics which allows visual evaluation of QC metrics, objective selection of insightful optimal cluster numbers and discrimination between true variation and background noise.
 <br />
-The easiest way to generate an interactive summary QC report is to run the `RUN_ME.R` script from the RStudio. The required inputs are a gene-cell count matrix, feature-barcode matrices, and tSNE and UMAP projections from 10X CellRanger count.
+The easiest way to generate an interactive summary QC report is to run the `RUN_ME.R` script from RStudio. The required inputs are a gene-cell count matrix, feature-barcode matrices, and tSNE and UMAP projections from 10X CellRanger count.
 
 ### Easy Installation
 1. Install the R [(LINK)](https://cran.r-project.org/)
@@ -98,7 +98,7 @@ Alternatively, you can download the source codes and install libraries using the
 | *Figure 1. How to download scQCEA from GitHub* |
 
 ### Manual
-It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts incluidng `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
+It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts including `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
 
 ```{r,eval=FALSE}
 
@@ -121,7 +121,7 @@ An interactive QC report automatically will be generated in one HTML file in the
 |:--:| 
 | *Figure 2. The outline of scQCEA. See text for details* |
 
-Experimental workflow describes scRNA-seq transcriptome processing and sequencing platform. Data processing workflow presents an analysis pipeline to process data, including aligning reads, generating feature-barcode matrices, and other secondary analyses. Samples information and QC metrics provide tables of metadata and QC, listing a variety of metrics per application. Data analysis and quality control present projection of transcriptionally and functionally distinct clusters, highlighted by cell type group, including UMAP and t-SNE plots. Diagnostic plots provide technical features, including the distribution of non-duplicate reads with mapping quality per barcode.
+Experimental workflow describes scRNA-seq transcriptome processing and sequencing platform. Data processing workflow presents an analysis pipeline to process data, including aligning reads, generating feature-barcode matrices, and other secondary analyses. Samples information and QC metrics provide tables of metadata and QC, listing a variety of metrics per application. Data analysis and quality control present projections of transcriptionally and functionally distinct clusters, highlighted by cell type group, including UMAP and t-SNE plots. Diagnostic plots provide technical features, including the distribution of non-duplicate reads with mapping quality per barcode.
 <br />
 By default, the HTML report will be written in the /Outputs directory named `CLICK_ME.html`. You can open `CLICK_ME.html` without using rStudio/R. In addition, you can find a zip file in the /Outputs directory which is particularly useful to share or store the QC reports. The content of the "Data processing Workflow" section is automatically adjusted based on the type of application (s) and the "Library Type" column in "samples.metadata" file.
 <br />
@@ -153,19 +153,19 @@ As input, the scQCEA package expects the following data:
 |:--:| 
 | *Figure 6. Sample input files in outs/ subdirectories* |
 
-Genomics sample report file including a summary of the alignment and assignment of reads to cells and genes are present in the metrics_summary.csv.
+The genomics sample report file including a summary of the alignment and assignment of reads to cells and genes are present in the metrics_summary.csv.
 
-Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell experiments has the gene as a row (the gene name should be the human or mouse Ensembl gene ID) and the cell as a column. You can convert an HDF5 Feature-Barcode Matrix [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/advanced/h5_matrices) to a gene-cell count matrix using the cellranger mat2csv [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/matrices#mat2csv) command provided by 10Xgenomics. The cells in the `read_count.csv` file are from the filtered feature-barcode matrix generated by cell ranger.
+Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell experiments has the gene as a row (the gene name should be the human or mouse Ensembl gene ID) and the cell as a column. You can convert an HDF5 Feature-Barcode Matrix [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/advanced/h5_matrices) to a gene-cell count matrix using the cellranger mat2csv [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/matrices#mat2csv) command provided by 10Xgenomics. The cells in the `read_count.csv` file are from the filtered feature-barcode matrix generated by the cell ranger.
 
 The tSNE and UMAP projections are the outputs of dimensionality reduction analysis in CSV format (projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/algorithms/overview).
 
-You can automate organizing outputs of single-cell expriments (e.g. 10X CellRnager) to provide inputs for scQCEA package as follows:
+You can automate organizing outputs of single-cell experiments (e.g. 10X CellRnager) to provide inputs for the scQCEA package as follows:
 
 ```{r,eval=FALSE}
 
 #--- add the metrics_summary.csv and metadata files to the Inputs folder
 
-PID=( FOLDER-NAME ) # PID stnads for project ID
+PID=( FOLDER-NAME ) # PID stands for project ID
 echo ${PID[@]}
 
 types=('vdj' 'gex' 'feat' 'arc' 'atac' 'vdj-grouped' 'gex-grouped' 'feat-grouped' 'arc-grouped' 'atac-grouped')
@@ -222,7 +222,7 @@ scQCEA provides `CellTypeEnrichment()` functions, for cell-type enrichment analy
 library("scQCEA")
 
 csQCEAdir <- system.file("extdata", package = "scQCEA")
-# A directory path incluidng input files/folders
+# A directory path including input files/folders
 
 DataTyep <- '10X-gex'
 # Name of a folder including input files
@@ -259,7 +259,7 @@ CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, 
 
 `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
-The function applies the area under the curve and bimodal distribution to separate the distributions and evaluate the strength of enrichment of each reference cell with genes in an indicated cell (Aibar, et al., 2017). The outputs of `CellTypeEnrichment` function include visualization of transcriptionally and functionally distinct clusters, highlighted by cell type group using Uniform Manifold Approximation and Projection (UMAP) and t-stochastic neighbor embedding (t-SNE) plots. In addition, it generates Heatmap plots based on cells showing the most enriched expressed genes in each cell type group, and the Barcode Rank Plot showing the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells (Figure 7). The results can be used for objective selection of insightful optimal cluster numbers and discriminate between true variation and background noise. For data sets including multiple samples, you can batch submit serial jobs for parallel execution of `CellTypeEnrichment` function per sample on a High Performance Computing (HPC) system.
+The function applies the area under the curve and bimodal distribution to separate the distributions and evaluate the strength of enrichment of each reference cell with genes in an indicated cell (Aibar, et al., 2017). Outputs of the `CellTypeEnrichment` function include visualization of transcriptionally and functionally distinct clusters, highlighted by cell type group using Uniform Manifold Approximation and Projection (UMAP) and t-stochastic neighbour embedding (t-SNE) plots. In addition, it generates Heatmap plots based on cells showing the most enriched expressed genes in each cell type group, and the Barcode Rank Plot showing the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells (Figure 7). The results can be used for the objective selection of insightful optimal cluster numbers and discriminate between true variation and background noise. For data sets including multiple samples, you can batch submit serial jobs for parallel execution of the `CellTypeEnrichment` function per sample on a High Performance Computing (HPC) system.
 
 | <img src="CellTypeEnrichment_outputs.png" width="350" height="200"> | 
 |:--:| 
@@ -294,11 +294,10 @@ t=$(wc -l 'gex_aggregation')
 qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 ```
 
-You need to copy the files available at [LINK](https://github.com/isarnassiri/scQCEA/tree/CellTypeEnrichmentAnalysis_for_Multiple_Samples) to the folder of inputs files. You need to modify line 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depend to the set up of the HPC.
+You need to copy the files available at [LINK](https://github.com/isarnassiri/scQCEA/tree/CellTypeEnrichmentAnalysis_for_Multiple_Samples) to the folder of inputs files. You need to modify lines 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depending on the set-up of the HPC.
 
 **On a Desktop Computer:**
-
-As an alternative, you can run the `CellTypeEnrichment()` function in loop for multiple inputs. Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample name (e.g., HAN9935A100), a gene-cell count matrix path (e.g., ~/P220386/10X-gex/HAN9935A100), a repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome name (e.g., hsapiens). Read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each rows as input prameters of `CellTypeEnrichment()` function.
+As an alternative, you can run the `CellTypeEnrichment()` function in loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each rows as input prameters of `CellTypeEnrichment()` function.
 
 ### Example of Application
 
