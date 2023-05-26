@@ -372,7 +372,7 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   )
   
   # ----------------------------------
-  cat(paste0("\033[0;", 47, "m", "You can find the results in: ", "\033[0m","\n", output.dir_perSample, '/'))
+  cat(paste0("\033[0;", 47, "m", "You can find the results in: ", "\033[0m","\n", output.dir_perSample))
 
 }
 
