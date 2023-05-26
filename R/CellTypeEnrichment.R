@@ -356,14 +356,14 @@ CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, Back
   TotalUMIcount$rank = 1:dim(TotalUMIcount)[1]
   
   g3 <- ggplot(TotalUMIcount, aes(x = .data$nbrGenesAboveZero, y = .data$totalUMICount)) +
-    geom_point(alpha = 0.5, size = 1, aes(color = whiteList)) +
+    geom_point(alpha = 0.5, size = 3, aes(color = Cluster)) +
+    geom_point(data = TotalUMIcount[which(TotalUMIcount$Cluster == "Background"),], color = "red") + 
     xlab("Total UMI Count") +
-    ylab("Number of Detected Genes") +
+    ylab("Number of Detected Genes") + 
     labs(title="Quantification Plot") +
     theme_bw() +
-    theme(text = element_text(size=15), legend.text = element_text(size = 15), axis.title = element_text(size = 15), plot.title = element_text(size = 15, face = "bold", color = "black")) +
-    scale_color_manual('', labels = c("Cells", "Background"), values = c(`TRUE` = "gray", `FALSE` = "darkblue"))
-  
+    theme(text = element_text(size=15), legend.text = element_text(size = 15), axis.title = element_text(size = 15), plot.title = element_text(size = 15, face = "bold", color = "black"))  
+
   ggsave(
     paste0(output.dir_perSample, '/', 'TotalUMIvsDetectedGenes.png'),
     plot = g3,
