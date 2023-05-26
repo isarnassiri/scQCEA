@@ -297,13 +297,13 @@ qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 You need to copy the files available at [LINK](https://github.com/isarnassiri/scQCEA/tree/CellTypeEnrichmentAnalysis_for_Multiple_Samples) to the folder of inputs files. You need to modify lines 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depending on the set-up of the HPC.
 
 **On a Desktop Computer:**
-As an alternative, you can run the `CellTypeEnrichment()` function in loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each rows as input prameters of `CellTypeEnrichment()` function.
+As an alternative, you can run the `CellTypeEnrichment()` function in a loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each row as input parameters of `CellTypeEnrichment()` function.
 
 ### Example of Application
 
-To demonstrate the utility of scQCEA, we apply the workflow to the sixteen gene expression profiles of eight patients with metastatic melanoma, prepared from pre- and post-treatment experimental batches (Fairfax, et al., 2020). Download and unzip the `OGC_Interactive_QC_Report_ P180121.zip` file available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Example-of-Application). You can open `CLICK_ME.html` file inside the unzipped folder without using rStudio/R.
+To demonstrate the utility of scQCEA, we apply the workflow to the sixteen gene expression profiles of eight patients with metastatic melanoma, prepared from pre- and post-treatment experimental batches (Fairfax, et al., 2020). Download and unzip the `OGC_Interactive_QC_Report_ P180121.zip` file available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Example-of-Application). You can open the `CLICK_ME.html` file inside the unzipped folder without using rStudio/R.
 
-The interactive report of quality control metrics and image QC of profiles allowed visual evaluation and comparison of comprehensive QC metrics. Top ranking genes by expression in each cell illustrate similar cell types in samples, all associated with monocytes, t-cells, and related subsets. These results suggest that the cell type enrichment analysis captures the main clusters across cells and samples share similar cellular compositions in agreement with the original paper (Fairfax, et al., 2020). 
+The interactive report of quality control metrics and image QC of profiles allowed visual evaluation and comparison of comprehensive QC metrics. Top-ranking genes by expression in each cell illustrate similar cell types in samples, all associated with monocytes, t-cells, and related subsets. These results suggest that the cell type enrichment analysis captures the main clusters across cells and samples share similar cellular compositions in agreement with the original paper (Fairfax, et al., 2020). 
 
 ### References
 Fairfax, B.P., et al. Peripheral CD8+ T cell characteristics associated with durable responses to immune checkpoint blockade in patients with metastatic melanoma. Nature Medicine 2020;26(2):193-199.
