@@ -96,6 +96,12 @@ RawFeatureDir = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/raw_featu
 FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
 # A folder including raw feature-barcode matrices from 10X CellRanger count (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz)
 
+nCores = 1
+# Number of cores to use for computation.
+
+aucMaxRank = 250
+# Number of expressed/detected genes that are going to be used to calculate the AUC. As a default, the first 250 genes are used to calculate the AUC.
+
 CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes ) 
 ``` 
 
