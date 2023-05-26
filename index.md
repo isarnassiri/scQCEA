@@ -275,7 +275,7 @@ We used Human Protein Atlas database (version 22.0) to generate a repository of 
 
 ### Run Cell Type Enrichment Analysis for Multiple Samples
 **On an HPC Cluster:** 
-Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample name (e.g., HAN9935A100), a gene-cell count matrix path (e.g., ~/P220386/10X-gex/HAN9935A100), a repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome name (e.g., hsapiens) as follows:
+Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample names (e.g., HAN9935A100), gene-cell count matrix paths (e.g., ~/P220386/10X-gex/HAN9935A100), repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome names (e.g., hsapiens) as follows:
 
 ```{r,eval=FALSE}
 P220386 HAN9935A100     ~/P220386/10X-gex/HAN9935A100    ~/references/reference_gene_sets/human   hsapiens
