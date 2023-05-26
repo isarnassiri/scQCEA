@@ -60,7 +60,7 @@
 # FilteredFeatureBarcodes = paste(csQCEAdir, 'Inputs', DataTyep, SampleName, 'outs/filtered_feature_bc_matrix', sep = '/')
 # aucMaxRank = 250;
 # nCores = 1;
-# CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes )
+# CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes, aucMaxRank = 250, nCores = 1 )
 #'@export
 CellTypeEnrichment <- NULL
 CellTypeEnrichment <- function(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes, aucMaxRank = 250, nCores = 1 )
