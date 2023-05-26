@@ -273,7 +273,8 @@ The required inputs are a gene-cell count matrix (outs/read_count.csv), feature-
 
 We used Human Protein Atlas database (version 22.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 95 reference gene sets, and 2348 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/main/Scripts/ReferenceGeneSets). The repository of reference genes covers human and mouse genes with the possibility to expand it to other species. 
 
-### Run Cell Type Enrichment Analysis for Multiple Samples
+**Run Cell Type Enrichment Analysis for Multiple Samples**
+
 **On an HPC Cluster:** 
 Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample names (e.g., HAN9935A100), gene-cell count matrix paths (e.g., ~/P220386/10X-gex/HAN9935A100), repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome names (e.g., hsapiens) as follows:
 
@@ -296,7 +297,7 @@ qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 You need to copy the files available at [LINK](https://github.com/isarnassiri/scQCEA/tree/CellTypeEnrichmentAnalysis_for_Multiple_Samples) to the folder of inputs files. You need to modify lines 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depending on the set-up of the HPC.
 
 **On a Desktop Computer:**
-As an alternative, you can run the `CellTypeEnrichment()` function in a loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each row as input parameters of `CellTypeEnrichment()` function.
+You can run the `CellTypeEnrichment()` function in a loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each row as input parameters of `CellTypeEnrichment()` function.
 
 ### Example of Application
 
