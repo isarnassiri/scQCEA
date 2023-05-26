@@ -18,4 +18,4 @@ t=$(wc -l 'gex_aggregation')
 qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 ```
 
-You need to copy the files in this directory to the folder of inputs files and modify line 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depend to the set up of the HPC.
+You need to copy the files in this directory to the folder of inputs files and modify line 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depending on the set-up of the HPC.
