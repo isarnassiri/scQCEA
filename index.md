@@ -157,7 +157,7 @@ The genomics sample report in the `metrics_summary.csv` files includes a summary
 Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell experiments has the gene as a row (the gene name should be the human or mouse Ensembl gene ID) and the cell as a column. 
 The tSNE and UMAP projections are the outputs of dimensionality reduction analysis in CSV format (projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/algorithms/overview).
 
-If you have duplicated sample ID in the metadata.samples files, scQCEA assusmes you resequenced the same library to increase read depth. You need to aggregate multiple sequencing runs of the same library using cellranger count, and saved them in separate folder with grouped extention (e.g, 10X-gex-grouped). For this case, scQCEA generates a section in the interactive QC report, called GML (Grouped Multiple Libraries per sample) to visualise the QC measures.
+If you have duplicated sample ID in the metadata.samples files, scQCEA assusmes you resequenced the same library to increase read depth. For this case, scQCEA generates a section in the interactive QC report, called GML (Grouped Multiple Libraries per sample) to visualise the QC measures. Please note that if you have several sequencing runs of the same library (e.g., increase read depth by resequencing the same library) you need to aggregate sequencing runs of the same library using cellranger count, and saved them in separate folder with '-grouped' extention (e.g, 10X-gex-grouped).
 
 You can find sample input files in the directory structure of the installed package using `system.file("extdata", package = "scQCEA")` command. 
 
