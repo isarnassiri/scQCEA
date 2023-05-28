@@ -97,7 +97,7 @@ Alternatively, you can download the source codes and install libraries using the
 | *Figure 1. How to download scQCEA from GitHub* |
 
 ### Manual
-It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts including `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
+It is easy to create an interactive QC report for those who possess little or no programming language skills. To run and generate an interactive QC report on your computer please install and call the scQCEA using rStudio, select all scripts including the `GenerateInteractiveQCReport()` function, and click on the "Run" button at the top right of the Source tab. An interactive QC report automatically will be generated in one HTML file, including four sections: experimental workflow, data processing workflow, sample information and QC metrics, data analysis and quality control.
 
 ```{r,eval=FALSE}
 
@@ -152,7 +152,7 @@ As input, the scQCEA package expects the following data:
 |:--:| 
 | *Figure 6. Sample input files in outs/ subdirectories* |
 
-The genomics sample report file including a summary of the alignment and assignment of reads to cells and genes are present in the metrics_summary.csv.
+The genomics sample report in the `metrics_summary.csv` files includes a summary of the alignment and assignment of reads to cells and genes.
 
 Raw count data from 10X CellRanger (outs/read_count.csv) or other single-cell experiments has the gene as a row (the gene name should be the human or mouse Ensembl gene ID) and the cell as a column. 
 The tSNE and UMAP projections are the outputs of dimensionality reduction analysis in CSV format (projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/algorithms/overview).
@@ -215,26 +215,26 @@ aucMaxRank = 250
 CellTypeEnrichment(SampleName, SamplesMetadata, ReadCount, GTF, BackendDataDir, tSNECellranger, UMAPCellranger, RawFeatureDir, FilteredFeatureBarcodes, aucMaxRank = aucMaxRank, nCores = nCores )
 ``` 
 
-`GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
+The `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
 The function applies the area under the curve and bimodal distribution to separate the distributions and evaluate the strength of enrichment of each reference cell with genes in an indicated cell (Aibar, et al., 2017). Outputs of the `CellTypeEnrichment` function include visualization of transcriptionally and functionally distinct clusters, highlighted by cell type group using Uniform Manifold Approximation and Projection (UMAP) and t-stochastic neighbour embedding (t-SNE) plots. In addition, it generates Heatmap plots based on cells showing the most enriched expressed genes in each cell type group, and the Barcode Rank Plot showing the distribution of non-duplicate reads with mapping quality at least 30 per barcode and which barcodes were inferred to be associated with cells. The results can be used for the objective selection of insightful optimal cluster numbers and discriminate between true variation and background noise. For data sets including multiple samples, you can batch submit serial jobs for parallel execution of the `CellTypeEnrichment` function per sample on a High Performance Computing (HPC) system.
 
 | <img src="CellTypeEnrichment_outputs.png" width="350" height="200"> | 
 |:--:| 
-| *Figure 7. The outputs of CellTypeEnrichment function.* |
+| *Figure 7. The outputs of the CellTypeEnrichment function.* |
 
-`GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
+The `GenerateInteractiveQCReport()` function uses these output files and generates an interactive QC report for multiple samples to compare and examine biases and outliers over biological and technical measures.
 
 **Inputs for cell-type enrichment analysis:**
 
 The required inputs are a gene-cell count matrix (outs/read_count.csv), feature-barcode matrices (barcodes.tsv.gz, features.tsv.gz, matrix.mtx.gz) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/matrices), tSNE and UMAP projections from 10X CellRanger count (analysis/.../projection.csv) [(LINK)](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/output/analysis), and a repository of reference gene sets.
 
-We used Human Protein Atlas database (version 22.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 95 reference gene sets, and 2348 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Repository-of-Cell-Type-Specific-Gene-Sets/). The repository of reference genes covers human and mouse genes with the possibility to expand it to other species. 
+We used Human Protein Atlas database (version 22.0) to generate a repository of reference gene sets that are exclusively expressed in each cell type [(LINK)](https://www.proteinatlas.org/). The normalized expression (NX) value was used to compare gene expression between tissues and select cell type-specific marker genes from RNA single-cell profiles. The repository includes 95 reference gene sets, and 2348 marker genes and is available at [LINK](https://github.com/isarnassiri/scQCEA/tree/Repository-of-Cell-Type-Specific-Gene-Sets/). The repository of reference genes covers human and mouse genes with the possibility to expand them to other species. 
 
 #### More input options for cell-type enrichment analysis
 
 ##### Seurat Object:
-You can transform Seurat object to csv format as follows:
+You can transform the Seurat object to CSV format as follows:
 
 ```{r,eval=FALSE}
 library(data.table)
@@ -248,7 +248,7 @@ An HDF5 Feature-Barcode Matrix [(LINK)](https://support.10xgenomics.com/single-c
 #### Run Cell Type Enrichment Analysis for Multiple Samples
 
 **On an HPC Cluster:** 
-Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample names (e.g., HAN9935A100), gene-cell count matrix paths (e.g., ~/P220386/10X-gex/HAN9935A100), repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome names (e.g., hsapiens) as follows:
+Create a tab-separated file (e.g., gex_aggregation) with input data set name (e.g., P220386), sample names (e.g., HAN9935A100), gene-cell count matrix paths (e.g., ~/P220386/10X-gex/HAN9935A100), the  repository of reference gene sets path (e.g., ~/references/reference_gene_sets/human), and reference genome names (e.g., hsapiens) as follows:
 
 ```{r,eval=FALSE}
 P220386 HAN9935A100     ~/P220386/10X-gex/HAN9935A100    ~/references/reference_gene_sets/human   hsapiens
@@ -256,7 +256,7 @@ P220386 HAN9935A101     ~/P220386/10X-gex/HAN9935A101    ~/references/reference_
 P220386 HAN9935A102     ~/P220386/10X-gex/HAN9935A102    ~/references/reference_gene_sets/human   hsapiens
 ```
 
-Use this file to submit enrichment analysis scripts in parallel on the HPC cluster using `CellTypeEnrichment_Multiple_Samples.sh` script as follows:
+Use this file to submit enrichment analysis scripts in parallel on the HPC cluster using the `CellTypeEnrichment_Multiple_Samples.sh` script as follows:
 
 ```{r,eval=FALSE}
 NAMEFOLDER='P220386'
@@ -269,11 +269,11 @@ qsub -t 1-${t%% *} CellTypeEnrichment_Multiple_Samples.sh $PWD'/gex_aggregation'
 You need to copy the files available at [LINK](https://github.com/isarnassiri/scQCEA/tree/CellTypeEnrichmentAnalysis_for_Multiple_Samples) to the folder of inputs files. You need to modify lines 5-6, and 10 in `CellTypeEnrichment_Multiple_Samples.sh` depending on the set-up of the HPC.
 
 **On a Desktop Computer:**
-You can run the `CellTypeEnrichment()` function in a loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each row as input parameters of `CellTypeEnrichment()` function.
+You can run the `CellTypeEnrichment()` function in a loop for multiple inputs. Create a tab-separated file as described above, read the tab-separated file (e.g., gex_aggregation) in R, and use elements in each row as input parameters of the `CellTypeEnrichment()` function.
 
 #### Transfer QC metrics summary to the Inputs folder
 
-Before running the `GenerateInteractiveQCReport()` function, you need to transfer `metrics_summary.csv` and `samples.metadata` files to the Inputs/ folder. You can use `MetricsSummary.sh` script to automatise transferring files for a scRNA-Seq project (e.g., P230078) as follows:
+Before running the `GenerateInteractiveQCReport()` function, you need to transfer the `metrics_summary.csv` and `samples.metadata` files to the Inputs/ folder. You can use the `MetricsSummary.sh` script to automatise transferring files for a scRNA-Seq project (e.g., P230078) as follows:
 
 You need to copy the MetricsSummary.sh script available at [LINK](https://github.com/isarnassiri/scQCEA/tree/MetricsSummary) to the folder of inputs files. 
 
