@@ -275,7 +275,7 @@ You can run the `CellTypeEnrichment()` function in a loop for multiple inputs. C
 
 Before running the `GenerateInteractiveQCReport()` function, you need to transfer the `metrics_summary.csv` and `samples.metadata` files to the Inputs/ folder. You can use the `MetricsSummary.sh` script to automatise transferring files for a scRNA-Seq project (e.g., P230078) as follows:
 
-You need to copy the MetricsSummary.sh script available at [LINK](https://github.com/isarnassiri/scQCEA/tree/MetricsSummary) to the folder of inputs files. 
+You need to copy the MetricsSummary.sh script available at [LINK](https://github.com/isarnassiri/scQCEA/tree/MetricsSummary) to the folder of inputs files and run it as follows: 
 
 ```{r,eval=FALSE}
 #- copy MetricsSummary.sh script to the project folder:
