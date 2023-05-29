@@ -15,13 +15,11 @@ if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
 library(devtools)
 devtools::install_github("walkerke/bsselectR")
 install_github("isarnassiri/scQCEA")
-```
 
+```
 All dependency packages automatically will be downloaded, installed and loaded from CRAN-like repositories. The following versions of its dependencies are compatible with the library:
 
 **Required version of packages in R:**
-
-```markdown
 
 ─ Session info ──────────────────────────────────────────────────────────────────────────────────
  version  R version 4.1.3 (2022-03-10)
